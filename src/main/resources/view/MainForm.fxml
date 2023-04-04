@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="690.0" prefWidth="1366.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hms.controller.MainFormController">
+   <children>
+      <ImageView fitHeight="63.0" fitWidth="93.0" layoutX="20.0" layoutY="10.0" onMouseClicked="#imgLogoOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/logo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="474.0" layoutY="14.0" text="Hostel Management System">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="502.0" layoutY="665.0" prefHeight="23.0" prefWidth="392.0" text="Copyright © 2023 IJSE. All rights reserved." textFill="#6e6d6d">
+         <font>
+            <Font name="DejaVu Sans Bold" size="11.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="pneContainer" layoutX="8.0" layoutY="80.0" prefHeight="585.0" prefWidth="1350.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="80.0" />
+   </children>
+</AnchorPane>
