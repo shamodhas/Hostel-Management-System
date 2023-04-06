@@ -1,11 +1,14 @@
 package lk.ijse.hms.bo.util;
 
+import lk.ijse.hms.dto.CustomDTO;
 import lk.ijse.hms.dto.RoomDTO;
 import lk.ijse.hms.dto.StudentDTO;
 import lk.ijse.hms.dto.UserDTO;
 import lk.ijse.hms.entity.Room;
 import lk.ijse.hms.entity.Student;
 import lk.ijse.hms.entity.User;
+
+import java.sql.Date;
 
 /**
  * Created By shamodha_s_rathnamalala
@@ -24,5 +27,9 @@ public class Convertor {
 
     public StudentDTO fromStudent(Student student) {
         return new StudentDTO(student.getStudentId(), student.getName(), student.getAddress(), student.getContactNo(), student.getDob(), student.getGender());
+    }
+
+    public CustomDTO fromCustom(Object[] custom) {
+        return new CustomDTO((String) custom[0], (String) custom[1], (String) custom[2], (String) custom[3], (String) custom[4], (Double) custom[5], custom[6]=="PAID"? CustomDTO.Status.PAID: CustomDTO.Status.UNPAID, (Date) custom[7]);
     }
 }

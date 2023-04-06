@@ -1,6 +1,9 @@
 package lk.ijse.hms.dao.custom;
 
 import lk.ijse.hms.dao.SuperDAO;
+import org.hibernate.Session;
+
+import java.util.List;
 
 /**
  * Created By shamodha_s_rathnamalala
@@ -9,4 +12,5 @@ import lk.ijse.hms.dao.SuperDAO;
  */
 
 public interface QueryDAO extends SuperDAO {
+    List<Object[]> findAllUnPaidReservation(Session session);
 }

@@ -1,8 +1,10 @@
 package lk.ijse.hms.dao.custom.impl;
 
 import lk.ijse.hms.dao.custom.ReservationDAO;
+import lk.ijse.hms.dto.CustomDTO;
 import lk.ijse.hms.entity.Reservation;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,5 +58,13 @@ public class ReservationDAOImpl implements ReservationDAO {
     @Override
     public long count(Session session) {
         return session.createQuery("FROM Reservation ").list().size();
+    }
+
+    @Override
+    public boolean updateStatusByPk(String reservationId, CustomDTO.Status status, Session session) {
+        Query query = session.createQuery("UPDATE Reservation SET status = :status WHERE resId = :reservationId");
+        query.setParameter("status", (status == CustomDTO.Status.PAID?"PAID":"UNPAID"));
+        query.setParameter("reservationId", reservationId);
+        return 0 < query.executeUpdate();
     }
 }
