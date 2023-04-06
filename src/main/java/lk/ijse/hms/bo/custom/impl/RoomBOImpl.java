@@ -14,6 +14,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -70,6 +71,20 @@ public class RoomBOImpl implements RoomBO {
         }catch (Exception e){
             transaction.rollback();
             return false;
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public String getNextReservationId() {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        try {
+            Optional<String> optional = reservationDAO.getLastPk(session);
+            if (optional.isPresent()) {
+                return String.format("R%03d", Integer.parseInt(optional.get().substring(1))+1);
+            }
+            return "R001";
         }finally {
             session.close();
         }

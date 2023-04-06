@@ -20,4 +20,6 @@ public interface RoomBO extends SuperBO {
     List<CustomDTO> getAllUnPaidReservation();
 
     boolean payReservationByReservationId(String reservationId, CustomDTO.Status paid);
+
+    String getNextReservationId();
 }
