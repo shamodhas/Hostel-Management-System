@@ -1,11 +1,11 @@
 package lk.ijse.hms.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import lk.ijse.hms.util.Navigation;
-import lk.ijse.hms.util.Route;
+import com.jfoenix.controls.JFXButton;
+import javafx.scene.control.Label;
 
 /**
  * Created By shamodha_s_rathnamalala
@@ -18,18 +18,68 @@ public class MainFormController {
     @FXML
     private AnchorPane pneContainer;
 
-    public void initialize(){
-        Navigation.init(pneContainer);
-        loadWelcomeForm();
+    @FXML
+    private JFXButton btnDashboard;
+
+    @FXML
+    private JFXButton btnStudent;
+
+    @FXML
+    private JFXButton btnRoom;
+
+    @FXML
+    private JFXButton btnReservation;
+
+    @FXML
+    private JFXButton btnPayment;
+
+    @FXML
+    private JFXButton btnUser;
+
+    @FXML
+    private Label lblUserStatus;
+
+    @FXML
+    private Label lblDate;
+
+    @FXML
+    void btnDashboardOnAction(ActionEvent event) {
+
     }
 
     @FXML
-    public void imgLogoOnMouseClicked(MouseEvent mouseEvent) {
-        loadWelcomeForm();
+    void btnPaymentOnAction(ActionEvent event) {
+
     }
 
-    private void loadWelcomeForm() {
-        Navigation.navigate(Route.WELCOME);
+    @FXML
+    void btnReservationOnAction(ActionEvent event) {
+
     }
+
+    @FXML
+    void btnRoomOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnStudentOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnUserOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void imgMouseClock(MouseEvent event) {
+
+    }
+
+    @FXML
+    void logOutOnAction(ActionEvent event) {
+
+    }
+
 }
-

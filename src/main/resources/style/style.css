@@ -1,0 +1,27 @@
+.navigation-bar{
+    -fx-background-color:  linear-gradient(to bottom,#1CB5E0,#000046);
+}
+.log-out-btn{
+    -fx-cursor: hand;
+}
+.log-out-btn:hover{
+    -fx-background-color: #c0392b;
+    -fx-text-fill: #fff;
+}
+.nav-btn{
+    -fx-cursor: hand;
+}
+.nav-btn:hover{
+    -fx-background-color: rgba(0, 0, 70, 0.13);
+}
+.card{
+    -fx-background-color: #fff;
+    -fx-background-radius: 10px;
+}
+.left-pane{
+    -fx-background-color: #B0D8DA;
+}
+.right-pane{
+    -fx-background-color: #fff;
+    -fx-background-radius: 36px 0 0 36px;
+}

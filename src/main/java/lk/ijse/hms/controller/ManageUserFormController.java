@@ -8,29 +8,29 @@ import javafx.scene.control.TextField;
 
 /**
  * Created By shamodha_s_rathnamalala
- * Date : 4/4/2023
- * Time :11:57 PM
+ * Date : 4/5/2023
+ * Time :11:38 AM
  */
 
-public class ManageRoomFormController {
+public class ManageUserFormController {
 
     @FXML
-    private TableView<?> tblRoom;
+    private TableView<?> tblUser;
 
     @FXML
     private JFXButton btnBack;
 
     @FXML
-    private JFXButton btnAddRoom;
+    private JFXButton btnAdd;
 
     @FXML
     private JFXButton btnUpdateDelete;
 
     @FXML
-    private TextField txtSearchRoom;
+    private TextField txtSearchUser;
 
     @FXML
-    void btnAddRoomOnAction(ActionEvent event) {
+    void btnAddOnAction(ActionEvent event) {
 
     }
 

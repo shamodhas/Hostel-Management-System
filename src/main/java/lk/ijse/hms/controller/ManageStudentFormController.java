@@ -77,7 +77,7 @@ public class ManageStudentFormController {
 
     @FXML
     void btnBackOnAction(ActionEvent event){
-        Navigation.navigate(Route.MENU);
+
     }
 
     @FXML

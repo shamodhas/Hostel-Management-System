@@ -27,35 +27,6 @@ public class Navigation {
         Navigation.pneContainer = pneContainer;
     }
 
-    public static void navigate(Route route){
-        pneContainer.getChildren().clear();
-        String location = null;
-        switch (route){
-            case MENU:
-                location = "MenuForm.fxml";
-                stage.setTitle("Menu - HMS");
-                break;
-            case ROOM:
-                location = "ManageRoomForm.fxml";
-                stage.setTitle("Manage Rooms");
-                break;
-            case STUDENT:
-                location = "ManageStudentForm.fxml";
-                stage.setTitle("Manage Students");
-                break;
-            case WELCOME:
-                location = "WelcomeForm.fxml";
-                stage.setTitle("Welcome to HMS v1.0.0");
-                break;
-            case RESERVATION:
-                location = "ManageReservationForm.fxml";
-                stage.setTitle("Manage Reservation");
-                break;
-        }
-        try {
-            pneContainer.getChildren().add(FXMLLoader.load(Navigation.class.getResource("/view/"+location)));
-        } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR,"Ui error ...!").show();
-        }
+    public static void navigate(Route route) {
     }
 }

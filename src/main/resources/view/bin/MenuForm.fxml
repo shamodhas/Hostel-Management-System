@@ -22,7 +22,7 @@
                      <graphic>
                         <ImageView fitHeight="117.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../assets/manage_student.png" />
+                              <Image url="@../../assets/manage_student.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -43,7 +43,7 @@
                      <graphic>
                         <ImageView fitHeight="117.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../assets/manage_room.png" />
+                              <Image url="@../../assets/manage_room.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -64,7 +64,7 @@
                      <graphic>
                         <ImageView fitHeight="117.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../assets/reservation.png" />
+                              <Image url="@../../assets/reservation.png" />
                            </image>
                         </ImageView>
                      </graphic>

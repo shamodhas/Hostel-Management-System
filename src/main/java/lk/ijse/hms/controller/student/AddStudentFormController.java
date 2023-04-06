@@ -40,6 +40,8 @@ public class AddStudentFormController {
     }
 
     public void init(TableView<StudentTM> tblStudent) {
+        if (tblStudent != null){
 
+        }
     }
 }

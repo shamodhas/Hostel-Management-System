@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="629.0" fitWidth="1350.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/main_image.jpg" />
+            <Image url="@../../assets/main_image.jpg" />
          </image>
       </ImageView>
       <Label alignment="CENTER" layoutX="573.0" layoutY="20.0" text="WELCOME" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -34,7 +34,7 @@
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../assets/menu_icon.png" />
+                        <Image url="@../../assets/menu_icon.png" />
                      </image>
                   </ImageView>
                </graphic>
