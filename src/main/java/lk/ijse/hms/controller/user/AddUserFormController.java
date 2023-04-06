@@ -5,12 +5,13 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TableView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import lk.ijse.hms.controller.LoginFormController;
+import lk.ijse.hms.controller.ManageUserFormController;
 import lk.ijse.hms.dto.UserDTO;
-
-import javax.swing.text.TableView;
+import lk.ijse.hms.view.tm.UserTM;
 
 /**
  * Created By shamodha_s_rathnamalala
@@ -103,7 +104,10 @@ public class AddUserFormController {
 
     }
 
-    public void init(TableView tableView, LoginFormController loginFormController) {
-        this.loginFormController = loginFormController;
+    public void init(LoginFormController loginFormController) {
+
+    }
+    public void init(TableView<UserTM> tblUser, ManageUserFormController manageUserFormController) {
+
     }
 }

@@ -1,6 +1,7 @@
 package lk.ijse.hms.dao;
 
 import lk.ijse.hms.entity.SuperEntity;
+import org.hibernate.Session;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,18 +14,18 @@ import java.util.Optional;
  */
 
 public interface CrudDAO<T extends SuperEntity,ID extends Serializable> extends SuperDAO{
-    boolean save(T entity);
+    void save(T t, Session session);
 
-    boolean update(T entity);
+    void update(T t, Session session);
 
-    boolean deleteByPk(ID id);
+    void deleteByPk(T t, Session session);
 
-    List<T> findAll();
+    List<T> findAll(Session session);
 
-    Optional<T> findByPk(ID id);
+    Optional<T> findByPk(ID pk, Session session);
 
-    Optional<String> getLastPk();
+    Optional<String> getLastPk(Session session);
 
-    long count();
+    long count(Session session);
 
 }

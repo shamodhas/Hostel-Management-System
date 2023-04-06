@@ -2,7 +2,7 @@ package lk.ijse.hms.view.tm;
 
 import lombok.*;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  * Created By shamodha_s_rathnamalala
@@ -21,6 +21,6 @@ public class StudentTM {
     String name;
     String address;
     String contactNo;
-    Date dob;
+    LocalDate dob;
     String gender;
 }

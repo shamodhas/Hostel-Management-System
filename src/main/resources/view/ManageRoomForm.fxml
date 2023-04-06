@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -26,18 +25,6 @@
       </TableView>
       <HBox alignment="CENTER" layoutX="20.0" layoutY="20.0" spacing="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <children>
-            <JFXButton fx:id="btnBack" onAction="#btnBackOnAction" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #f7a759;" text=" ">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/back_icon.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
             <JFXButton fx:id="btnAddRoom" mnemonicParsing="false" onAction="#btnAddRoomOnAction" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #2980b9;" text="Add Room +">
                <graphic>
                   <ImageView fitHeight="28.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">

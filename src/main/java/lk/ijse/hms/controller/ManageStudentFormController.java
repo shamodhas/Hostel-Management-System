@@ -1,25 +1,32 @@
 package lk.ijse.hms.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lk.ijse.hms.bo.BoFactory;
+import lk.ijse.hms.bo.BoTypes;
+import lk.ijse.hms.bo.custom.StudentBO;
 import lk.ijse.hms.controller.student.AddStudentFormController;
 import lk.ijse.hms.controller.student.UpdateStudentFormController;
-import lk.ijse.hms.util.Navigation;
-import lk.ijse.hms.util.Route;
 import lk.ijse.hms.view.tm.StudentTM;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 
 /**
  * Created By shamodha_s_rathnamalala
@@ -29,26 +36,61 @@ import java.net.URL;
 
 public class ManageStudentFormController {
     @FXML
-    private Button btnAddStudent;
-
-    @FXML
-    private JFXButton btnBack;
-
-    @FXML
-    private Button btnReservation;
-
-    @FXML
-    private Button btnUpdateDelete;
-
-    @FXML
     private TableView<StudentTM> tblStudent;
 
     @FXML
-    private TextField txtSearchMember;
+    private JFXButton btnAddStudent;
+
+    @FXML
+    private JFXButton btnUpdateDelete;
+
+    @FXML
+    private TextField txtSearchStudent;
+
+    private final StudentBO studentBO = BoFactory.getInstance().getBO(BoTypes.STUDENT);
+
 
     public void initialize(){
         btnUpdateDelete.setDisable(true);
-        btnReservation.setDisable(true);
+        setCellFactory();
+        loadTable();
+    }
+
+    private void loadTable() {
+        tblStudent.setItems(FXCollections.observableArrayList(studentBO.getAllStudent().stream().map(studentDTO -> new StudentTM(
+                studentDTO.getStudentId(),
+                studentDTO.getName(),
+                studentDTO.getAddress(),
+                studentDTO.getContactNo(),
+                studentDTO.getDob(),
+                studentDTO.getGender()))
+                .collect(Collectors.toList()))
+        );
+        txtSearchStudent.textProperty().addListener((observableValue, pre, curr) ->{
+            if (!Objects.equals(pre, curr)){
+                tblStudent.getItems().clear();
+                tblStudent.setItems(FXCollections.observableArrayList(studentBO.searchBookByText(curr).stream().map(studentDTO -> new StudentTM(
+                        studentDTO.getStudentId(),
+                        studentDTO.getName(),
+                        studentDTO.getAddress(),
+                        studentDTO.getContactNo(),
+                        studentDTO.getDob(),
+                        studentDTO.getGender()))
+                        .collect(Collectors.toList()))
+                );
+            }
+
+        } );
+
+        tblStudent.getSelectionModel().selectedItemProperty().addListener((observableValue, pre, curr) -> {
+            if (curr!=pre || curr!=null){
+                btnUpdateDelete.setDisable(false);
+            }
+
+        });
+    }
+
+    private void setCellFactory() {
         tblStudent.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("studentId"));
         tblStudent.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("name"));
         tblStudent.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -60,10 +102,12 @@ public class ManageStudentFormController {
     @FXML
     void btnAddStudentOnAction(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/student/AddStudentForm.fxml"));
+            URL resource = this.getClass().getResource("/view/student/AddStudentForm.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(resource);
             Parent load = fxmlLoader.load();
-            AddStudentFormController AddMemberController = fxmlLoader.getController();
-            AddMemberController.init(tblStudent);
+            AddStudentFormController addStudentFormController = fxmlLoader.getController();
+            addStudentFormController.init(tblStudent, this);
+
             Stage stage = new Stage();
             stage.setScene(new Scene(load));
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -71,18 +115,8 @@ public class ManageStudentFormController {
             stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR,"forms error ..!").show();
         }
-    }
-
-    @FXML
-    void btnBackOnAction(ActionEvent event){
-
-    }
-
-    @FXML
-    void btnReservationOnAction(ActionEvent event) {
-
     }
 
     @FXML
@@ -94,13 +128,14 @@ public class ManageStudentFormController {
             UpdateStudentFormController controller = fxmlLoader.getController();
             controller.init(tblStudent.getSelectionModel().getSelectedItem(),this);
             Stage stage = new Stage();
-            stage.setTitle("Update/Delete MemberDTO details");
+            stage.setTitle("Update/Delete Student details");
             stage.setScene(new Scene(load));
             stage.centerOnScreen();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR,"forms error ..!").show();
         }
     }
+
 }

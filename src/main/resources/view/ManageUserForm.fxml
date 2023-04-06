@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -13,7 +12,7 @@
 
 <AnchorPane prefHeight="629.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hms.controller.ManageUserFormController">
    <children>
-      <TableView fx:id="tblUser" layoutX="10.0" layoutY="86.0" prefHeight="487.0" prefWidth="1330.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <TableView fx:id="tblUser" layoutX="10.0" layoutY="86.0" prefHeight="487.0" prefWidth="1330.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="86.0">
          <columns>
             <TableColumn maxWidth="500.0" prefWidth="75.0" text="User Id" />
             <TableColumn maxWidth="500.0" prefWidth="32.0" text="NAME" />
@@ -26,20 +25,8 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <HBox alignment="CENTER" layoutX="20.0" layoutY="20.0" spacing="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+      <HBox alignment="CENTER" layoutX="20.0" layoutY="20.0" spacing="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
-            <JFXButton fx:id="btnBack" onAction="#btnBackOnAction" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #f7a759;" text=" ">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/back_icon.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
             <JFXButton fx:id="btnAdd" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #2980b9;" text="Add User +" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="28.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">

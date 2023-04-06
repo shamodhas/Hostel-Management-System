@@ -14,42 +14,47 @@ import java.util.Optional;
  */
 
 public class ReservationDAOImpl implements ReservationDAO {
-    public ReservationDAOImpl(Session session) {
+
+    @Override
+    public void save(Reservation reservation, Session session) {
+        session.save(reservation);
 
     }
 
     @Override
-    public boolean save(Reservation entity) {
-        return false;
+    public void update(Reservation reservation, Session session) {
+        session.update(reservation);
+
     }
 
     @Override
-    public boolean update(Reservation entity) {
-        return false;
+    public void deleteByPk(Reservation reservation, Session session) {
+        session.delete(reservation);
+
     }
 
     @Override
-    public boolean deleteByPk(String pk) {
-        return false;
+    public List<Reservation> findAll(Session session) {
+        return session.createQuery("FROM Reservation ").list();
     }
 
     @Override
-    public List<Reservation> findAll() {
-        return null;
+    public Optional<Reservation> findByPk(String pk, Session session) {
+        try {
+            return Optional.of(session.get(Reservation.class, pk));
+        }catch (Exception e){
+            return Optional.empty();
+        }
     }
 
     @Override
-    public Optional<Reservation> findByPk(String pk) {
-        return Optional.empty();
+    public Optional<String> getLastPk(Session session) {
+        List<String> list = session.createQuery("select resId from Reservation ORDER BY resId DESC").list();
+        return list.size() > 0? Optional.of(list.get(0)) : Optional.empty();
     }
 
     @Override
-    public Optional<String> getLastPk() {
-        return Optional.empty();
-    }
-
-    @Override
-    public long count() {
-        return 0;
+    public long count(Session session) {
+        return session.createQuery("FROM Reservation ").list().size();
     }
 }

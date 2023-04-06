@@ -21,18 +21,18 @@ public class DaoFactory {
                 daoFactory = new DaoFactory():daoFactory;
     }
 
-    public <T extends SuperDAO>T getDAO(Session session, DaoTypes daoTypes){
+    public <T extends SuperDAO>T getDAO(DaoTypes daoTypes){
         switch (daoTypes){
             case RESERVATION:
-                return (T) new ReservationDAOImpl(session);
+                return (T) new ReservationDAOImpl();
             case STUDENT:
-                return (T) new StudentDAOImpl(session);
+                return (T) new StudentDAOImpl();
             case ROOM:
-                return (T) new RoomDAOImpl(session);
+                return (T) new RoomDAOImpl();
             case USER:
-                return (T) new UserDAOImpl(session);
+                return (T) new UserDAOImpl();
             case QUERY:
-                return (T) new QueryDAOImpl(session);
+                return (T) new QueryDAOImpl();
             default:
                 return null;
         }

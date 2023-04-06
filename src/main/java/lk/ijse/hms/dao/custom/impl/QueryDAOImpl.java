@@ -10,7 +10,5 @@ import org.hibernate.Session;
  */
 
 public class QueryDAOImpl implements QueryDAO {
-    public QueryDAOImpl(Session session) {
 
-    }
 }

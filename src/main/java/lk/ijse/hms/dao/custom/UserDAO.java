@@ -2,6 +2,10 @@ package lk.ijse.hms.dao.custom;
 
 import lk.ijse.hms.dao.CrudDAO;
 import lk.ijse.hms.entity.User;
+import org.hibernate.Session;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Created By shamodha_s_rathnamalala
@@ -10,4 +14,7 @@ import lk.ijse.hms.entity.User;
  */
 
 public interface UserDAO extends CrudDAO<User, String> {
+    Optional<User> findByUserNamePassword(String userName, String password, Session session);
+
+    List<User> search(String text, Session session);
 }

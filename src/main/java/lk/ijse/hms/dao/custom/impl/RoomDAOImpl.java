@@ -3,7 +3,10 @@ package lk.ijse.hms.dao.custom.impl;
 import lk.ijse.hms.dao.custom.RoomDAO;
 import lk.ijse.hms.entity.Room;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,42 +17,52 @@ import java.util.Optional;
  */
 
 public class RoomDAOImpl implements RoomDAO {
-    public RoomDAOImpl(Session session) {
 
+    @Override
+    public void save(Room room, Session session) {
+        session.save(room);
     }
 
     @Override
-    public boolean save(Room entity) {
-        return false;
+    public void update(Room room, Session session) {
+        session.update(room);
     }
 
     @Override
-    public boolean update(Room entity) {
-        return false;
+    public void deleteByPk(Room room, Session session) {
+        session.delete(room);
     }
 
     @Override
-    public boolean deleteByPk(String pk) {
-        return false;
+    public List<Room> findAll(Session session) {
+        return session.createQuery("FROM Room ").list();
     }
 
     @Override
-    public List<Room> findAll() {
-        return null;
+    public Optional<Room> findByPk(String pk, Session session) {
+        try {
+            return Optional.of(session.get(Room.class, pk));
+        }catch (Exception e){
+            return Optional.empty();
+        }
     }
 
     @Override
-    public Optional<Room> findByPk(String pk) {
-        return Optional.empty();
+    public Optional<String> getLastPk(Session session) {
+        List<String> list = session.createQuery("select roomTypeId from Room ORDER BY roomTypeId DESC").list();
+        return list.size() > 0? Optional.of(list.get(0)) : Optional.empty();
     }
 
     @Override
-    public Optional<String> getLastPk() {
-        return Optional.empty();
+    public long count(Session session) {
+        return session.createQuery("FROM Room ").list().size();
     }
 
     @Override
-    public long count() {
-        return 0;
+    public List<Room> search(String text, Session session) {
+        text = "%"+text+"%";
+        Query query = session.createQuery("FROM Room WHERE roomTypeId LIKE :text OR type LIKE :text ");
+        query.setParameter("text", text);
+        return query.list();
     }
 }

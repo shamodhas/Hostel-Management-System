@@ -2,8 +2,8 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hms.controller.student.AddStudentFormController">
+<AnchorPane prefHeight="450.0" prefWidth="700.0" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hms.controller.student.AddStudentFormController">
    <children>
       <AnchorPane layoutX="41.0" layoutY="32.0" prefHeight="138.0" prefWidth="143.0">
          <children>
@@ -65,7 +65,7 @@
             <VBox layoutX="10.0" layoutY="241.0" spacing="10.0">
                <children>
                   <Label text="DOB :" />
-                  <JFXDatePicker fx:id="dpDOB" editable="false" onAction="#dpDOBOnAction" prefHeight="25.0" prefWidth="376.0" />
+                  <DatePicker fx:id="dpDOB" editable="false" focusTraversable="false" onAction="#dpDOBOnAction" prefWidth="371.0" styleClass="date-picker" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="318.0" spacing="10.0">

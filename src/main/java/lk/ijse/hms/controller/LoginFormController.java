@@ -10,14 +10,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import lk.ijse.hms.bo.BoFactory;
+import lk.ijse.hms.bo.BoTypes;
+import lk.ijse.hms.bo.custom.LoginBO;
+import lk.ijse.hms.bo.exception.NotFoundException;
 import lk.ijse.hms.controller.student.AddStudentFormController;
 import lk.ijse.hms.controller.user.AddUserFormController;
 import lk.ijse.hms.dto.UserDTO;
+import lk.ijse.hms.entity.User;
 
 import java.io.IOException;
 
@@ -28,14 +35,9 @@ import java.io.IOException;
  */
 
 public class LoginFormController {
-    @FXML
-    private FontAwesomeIconView fxUserIcon;
 
     @FXML
     private JFXTextField txtUserName;
-
-    @FXML
-    private FontAwesomeIconView fxLockIcon;
 
     @FXML
     private JFXPasswordField pfPassword;
@@ -45,6 +47,8 @@ public class LoginFormController {
 
     @FXML
     private FontAwesomeIconView fxEyeIcon;
+
+    private final LoginBO loginBO = BoFactory.getInstance().getBO(BoTypes.LOGIN);
 
     private boolean isHide = true;
 
@@ -58,7 +62,7 @@ public class LoginFormController {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/user/AddUserForm.fxml"));
             Parent load = fxmlLoader.load();
             AddUserFormController addUserFormController = fxmlLoader.getController();
-            addUserFormController.init(null,this);
+            addUserFormController.init(this);
             Stage stage = new Stage();
             stage.setScene(new Scene(load));
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -72,7 +76,40 @@ public class LoginFormController {
 
     @FXML
     void btnLoginOnAction(ActionEvent event) {
-
+        String userName = txtUserName.getText();
+        String password = (isHide?pfPassword:txtPassword).getText();
+        if (userName.isEmpty()){
+            txtUserName.setFocusColor(Color.RED);
+            txtUserName.requestFocus();
+        }else if (password.isEmpty()){
+            (isHide?pfPassword:txtPassword).setFocusColor(Color.RED);
+            (isHide?pfPassword:txtPassword).requestFocus();
+        }else {
+            UserDTO user = new UserDTO();
+            user.setUserName(userName);
+            user.setPassword(password);
+            try {
+                UserDTO userDTO = loginBO.verifyUser(user);
+                FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/MainForm.fxml"));
+                Parent load = fxmlLoader.load();
+                MainFormController mainFormController = fxmlLoader.getController();
+                mainFormController.init(userDTO);
+                Stage stage = new Stage();
+                stage.setScene(new Scene(load));
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.centerOnScreen();
+                stage.show();
+                Stage window = (Stage) txtUserName.getScene().getWindow();
+                window.close();
+            }catch (NotFoundException e){
+                (isHide?pfPassword:txtPassword).setFocusColor(Color.RED);
+                txtUserName.setFocusColor(Color.RED);
+                txtUserName.requestFocus();
+                new Alert(Alert.AlertType.WARNING,e.getMessage()).show();
+            } catch (IOException e) {
+                new Alert(Alert.AlertType.ERROR,"ui not found...!").show();
+            }
+        }
     }
 
     @FXML
@@ -100,18 +137,15 @@ public class LoginFormController {
     @FXML
     public void passwordRelease(KeyEvent keyEvent) {
         (isHide?pfPassword:txtPassword).setFocusColor(Color.valueOf("#00b000"));
-        fxLockIcon.setFill(Color.valueOf("#00b000"));
     }
 
     @FXML
     public void userNameRelease(KeyEvent keyEvent) {
         txtUserName.setFocusColor(Color.valueOf("#00b000"));
-        fxUserIcon.setFill(Color.valueOf("#00b000"));
     }
 
     public void init(UserDTO userDTO) {
         txtUserName.setText(userDTO.getUserName());
         (isHide?pfPassword:txtPassword).setText(userDTO.getPassword());
-        System.out.println(userDTO.getUserName());
     }
 }

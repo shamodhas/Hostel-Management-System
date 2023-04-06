@@ -3,6 +3,7 @@ package lk.ijse.hms.dao.custom.impl;
 import lk.ijse.hms.dao.custom.StudentDAO;
 import lk.ijse.hms.entity.Student;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,42 +15,52 @@ import java.util.Optional;
  */
 
 public class StudentDAOImpl implements StudentDAO {
-    public StudentDAOImpl(Session session) {
 
+    @Override
+    public void save(Student student, Session session) {
+        session.save(student);
     }
 
     @Override
-    public boolean save(Student entity) {
-        return false;
+    public void update(Student student, Session session) {
+        session.update(student);
     }
 
     @Override
-    public boolean update(Student entity) {
-        return false;
+    public void deleteByPk(Student student, Session session) {
+        session.delete(student);
     }
 
     @Override
-    public boolean deleteByPk(String pk) {
-        return false;
+    public List<Student> findAll(Session session) {
+        return session.createQuery("FROM Student ").list();
     }
 
     @Override
-    public List<Student> findAll() {
-        return null;
+    public Optional<Student> findByPk(String pk, Session session) {
+        try {
+            return Optional.of(session.get(Student.class, pk));
+        }catch (Exception e){
+            return Optional.empty();
+        }
     }
 
     @Override
-    public Optional<Student> findByPk(String pk) {
-        return Optional.empty();
+    public Optional<String> getLastPk(Session session) {
+        List<String> list = session.createQuery("select studentId from Student ORDER BY studentId DESC").list();
+        return list.size() > 0? Optional.of(list.get(0)) : Optional.empty();
     }
 
     @Override
-    public Optional<String> getLastPk() {
-        return Optional.empty();
+    public long count(Session session) {
+        return session.createQuery("FROM Student ").list().size();
     }
 
     @Override
-    public long count() {
-        return 0;
+    public List<Student> search(String text, Session session) {
+        text = "%"+text+"%";
+        Query query = session.createQuery("FROM Student WHERE studentId LIKE :text OR name LIKE :text OR address LIKE :text OR contactNo LIKE :text OR gender like :text");
+        query.setParameter("text", text);
+        return query.list();
     }
 }

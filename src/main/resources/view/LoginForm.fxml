@@ -25,7 +25,7 @@
                <children>
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <FontAwesomeIconView fx:id="fxUserIcon" fill="#3498db" glyphName="USER" size="25" />
+                        <FontAwesomeIconView fill="#3498db" glyphName="USER" size="25" />
                         <JFXTextField fx:id="txtUserName" focusColor="#3498db" focusTraversable="false" labelFloat="true" onKeyReleased="#userNameRelease" prefWidth="200.0" promptText="username" unFocusColor="#3498db">
                            <font>
                               <Font name="Arial Rounded MT Bold" size="13.0" />
@@ -35,7 +35,7 @@
                   </HBox>
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <FontAwesomeIconView fx:id="fxLockIcon" fill="#3498db" glyphName="LOCK" size="25" styleClass="icon-black" />
+                        <FontAwesomeIconView fill="#3498db" glyphName="LOCK" size="25" styleClass="icon-black" />
                         <Pane>
                            <children>
                               <JFXPasswordField fx:id="pfPassword" focusColor="#3498db" focusTraversable="false" labelFloat="true" onKeyReleased="#passwordRelease" prefWidth="200.0" promptText="password" unFocusColor="#3498db">

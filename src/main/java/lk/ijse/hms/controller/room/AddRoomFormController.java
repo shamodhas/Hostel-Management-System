@@ -5,6 +5,10 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
+import javafx.scene.input.KeyEvent;
+import lk.ijse.hms.controller.ManageRoomFormController;
+import lk.ijse.hms.view.tm.RoomTM;
 
 /**
  * Created By shamodha_s_rathnamalala
@@ -40,7 +44,17 @@ public class AddRoomFormController {
     }
 
     @FXML
+    void txtKeyMoneyKeyReleased(KeyEvent event) {
+
+    }
+
+    @FXML
     void txtKeyMoneyOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void txtQtyKeyReleased(KeyEvent event) {
 
     }
 
@@ -49,4 +63,7 @@ public class AddRoomFormController {
 
     }
 
+    public void init(TableView<RoomTM> tblRoom, ManageRoomFormController manageRoomFormController) {
+
+    }
 }
