@@ -12,11 +12,11 @@ import org.hibernate.Transaction;
 public class Tester {
     public static void main(String[] args) {
         Session session = FactoryConfiguration.getInstance().getSession();
-//        Transaction transaction = session.beginTransaction();
-//
-//        User user = new User("U001", "shamodha", null, null, null, null);
-//        session.save(user);
-//        transaction.commit();
-//        session.close();
+        Transaction transaction = session.beginTransaction();
+
+        User user = new User("U001", "shamodha", null, null, null, null);
+        session.save(user);
+        transaction.commit();
+        session.close();
     }
 }

@@ -19,7 +19,7 @@ import javax.persistence.Id;
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
-public class User {
+public class User implements SuperEntity{
     @Id
     String userId;
     String name;

@@ -20,7 +20,7 @@ import java.util.List;
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
-public class Student {
+public class Student implements SuperEntity{
     @Id
     @Column(name = "student_id")
     private String studentId;

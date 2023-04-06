@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 @Entity
-public class Reservation {
+public class Reservation implements SuperEntity{
     @Id
     @Column(name = "res_id")
     private String resId;
