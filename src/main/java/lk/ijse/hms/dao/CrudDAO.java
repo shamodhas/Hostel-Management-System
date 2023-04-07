@@ -18,7 +18,7 @@ public interface CrudDAO<T extends SuperEntity,ID extends Serializable> extends 
 
     void update(T t, Session session);
 
-    void deleteByPk(T t, Session session);
+    void deleteByPk(ID pk, Session session);
 
     List<T> findAll(Session session);
 

@@ -30,6 +30,18 @@ public class Convertor {
     }
 
     public CustomDTO fromCustom(Object[] custom) {
-        return new CustomDTO((String) custom[0], (String) custom[1], (String) custom[2], (String) custom[3], (String) custom[4], (Double) custom[5], (CustomDTO.Status) custom[6], (Date) custom[7]);
+        return new CustomDTO((String) custom[0], (String) custom[1], (String) custom[2], (String) custom[3], (String) custom[4], (Double) custom[5], custom[6] == "PAID"? CustomDTO.Status.PAID: CustomDTO.Status.UNPAID, (Date) custom[7]);
+    }
+
+    public Room toRoom(RoomDTO roomDTO) {
+        return new Room(roomDTO.getRoomTypeId(), roomDTO.getType(), roomDTO.getKeyMoney(), roomDTO.getQty(), null);
+    }
+
+    public Student toStudent(StudentDTO studentDTO) {
+        return new Student(studentDTO.getStudentId(), studentDTO.getName(), studentDTO.getAddress(), studentDTO.getContactNo(), studentDTO.getDob(), studentDTO.getGender(), null);
+    }
+
+    public User toUser(UserDTO userDTO) {
+        return new User(userDTO.getUserId(), userDTO.getName(), userDTO.getTelNo(), userDTO.getEmail(), userDTO.getUserName(), userDTO.getPassword());
     }
 }

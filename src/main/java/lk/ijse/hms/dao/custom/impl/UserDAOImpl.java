@@ -27,8 +27,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void deleteByPk(User user, Session session) {
-        session.delete(user);
+    public void deleteByPk(String pk, Session session) {
+        session.delete(session.load(User.class, pk));
     }
 
     @Override
@@ -57,10 +57,9 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Optional<User> findByUserNamePassword(String userName, String password, Session session) {
-        Query query = session.createQuery("FROM User WHERE userName= :u AND password =:p");
+    public Optional<User> findByUserName(String userName, Session session) {
+        Query query = session.createQuery("SELECT User FROM User WHERE userName= :u");
         query.setParameter("u", userName);
-        query.setParameter("p", password);
         List<User> list = query.list();
         return list.size() > 0? Optional.of(list.get(0)) : Optional.empty();
     }
@@ -68,7 +67,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public List<User> search(String text, Session session) {
         text = "%"+text+"%";
-        Query query = session.createQuery("FROM User WHERE userId LIKE :text OR name LIKE :text OR contactNo LIKE :text OR email LIKE :text OR userName LIKE :text OR password LIKE :text");
+        Query query = session.createQuery("SELECT User FROM User WHERE userId LIKE :text OR name LIKE :text OR contactNo LIKE :text OR email LIKE :text OR userName LIKE :text OR password LIKE :text");
         query.setParameter("text", text);
         return query.list();
     }

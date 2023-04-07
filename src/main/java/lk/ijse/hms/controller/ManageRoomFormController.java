@@ -18,13 +18,9 @@ import lk.ijse.hms.bo.BoTypes;
 import lk.ijse.hms.bo.custom.RoomBO;
 import lk.ijse.hms.controller.room.AddRoomFormController;
 import lk.ijse.hms.controller.room.UpdateRoomFormController;
-import lk.ijse.hms.controller.user.UpdateUserFormController;
-import lk.ijse.hms.controller.user.UserDetailsFormController;
-import lk.ijse.hms.dto.RoomDTO;
 import lk.ijse.hms.view.tm.RoomTM;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -57,10 +53,10 @@ public class ManageRoomFormController {
     public void initialize(){
         btnUpdateDelete.setDisable(true);
         setCellFactory();
-        loadTable();
+        refreshTable();
     }
 
-    private void loadTable() {
+    public void refreshTable() {
         tblRoom.setItems(FXCollections.observableArrayList(roomBO.getAllRoom().stream().map(roomDTO -> new RoomTM(roomDTO.getRoomTypeId(), roomDTO.getType(), roomDTO.getKeyMoney(), roomDTO.getQty())).collect(Collectors.toList())));
 
         txtSearchRoom.textProperty().addListener((observableValue, pre, curr) ->{
@@ -73,10 +69,7 @@ public class ManageRoomFormController {
         } );
 
         tblRoom.getSelectionModel().selectedItemProperty().addListener((observableValue, pre, curr) -> {
-            if (curr!=pre || curr!=null){
-                btnUpdateDelete.setDisable(false);
-            }
-
+            btnUpdateDelete.setDisable(curr == pre && curr == null);
         });
     }
 
@@ -93,7 +86,7 @@ public class ManageRoomFormController {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/room/AddRoomForm.fxml"));
             Parent load = fxmlLoader.load();
             AddRoomFormController addRoomFormController = fxmlLoader.getController();
-            addRoomFormController.init(tblRoom, this);
+            addRoomFormController.init(this);
             Stage stage = new Stage();
             stage.setScene(new Scene(load));
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -107,6 +100,10 @@ public class ManageRoomFormController {
 
     @FXML
     void btnUpdateDeleteOnAction(ActionEvent event) {
+        if (tblRoom.getSelectionModel().isEmpty()){
+            btnUpdateDelete.setDisable(true);
+            return;
+        }
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/room/UpdateRoomForm.fxml"));
             Parent load = fxmlLoader.load();

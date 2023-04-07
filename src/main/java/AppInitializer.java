@@ -21,7 +21,7 @@ public class AppInitializer extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Navigation.setStage(stage);
-        URL resource = this.getClass().getResource("/view/reservation/AddReservationForm.fxml");
+        URL resource = this.getClass().getResource("/view/ManageUserForm.fxml");
         Parent load = FXMLLoader.load(resource);
         stage.setScene(new Scene(load));
         stage.centerOnScreen();

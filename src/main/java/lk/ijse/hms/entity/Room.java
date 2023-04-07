@@ -27,6 +27,7 @@ public class Room implements SuperEntity{
     @Column(name = "key_money")
     private double keyMoney;
     private int qty;
+
     @OneToMany(mappedBy = "room",cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
 }

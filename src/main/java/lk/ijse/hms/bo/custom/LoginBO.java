@@ -1,6 +1,7 @@
 package lk.ijse.hms.bo.custom;
 
 import lk.ijse.hms.bo.SuperBO;
+import lk.ijse.hms.bo.exception.DuplicateException;
 import lk.ijse.hms.bo.exception.NotFoundException;
 import lk.ijse.hms.dto.UserDTO;
 
@@ -19,4 +20,8 @@ public interface LoginBO extends SuperBO{
     List<UserDTO> getAllUser();
 
     List<UserDTO> searchUserByText(String text);
+
+    String getNextUserId();
+
+    boolean saveUser(UserDTO userDTO) throws DuplicateException;
 }

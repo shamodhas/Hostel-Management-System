@@ -14,7 +14,7 @@ import java.util.Optional;
  */
 
 public interface UserDAO extends CrudDAO<User, String> {
-    Optional<User> findByUserNamePassword(String userName, String password, Session session);
+    Optional<User> findByUserName(String userName, Session session);
 
     List<User> search(String text, Session session);
 }

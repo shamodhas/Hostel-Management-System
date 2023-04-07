@@ -113,6 +113,7 @@ public class AddReservationFormController {
         if (roomBO.addReservation(customDTO)){
             cmbStudentId.setValue(null);
             cmbRoomTypeId.setValue(null);
+            manageReservationFormController.refreshTable();
             new Alert(Alert.AlertType.INFORMATION,"Reservation added successful..!").show();
         }else {
             new Alert(Alert.AlertType.WARNING,"Reservation not added..!").show();

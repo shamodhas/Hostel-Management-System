@@ -1,6 +1,8 @@
 package lk.ijse.hms.bo.custom.impl;
 
 import lk.ijse.hms.bo.custom.RoomBO;
+import lk.ijse.hms.bo.exception.DuplicateException;
+import lk.ijse.hms.bo.exception.InUseException;
 import lk.ijse.hms.bo.util.Convertor;
 import lk.ijse.hms.dao.DaoFactory;
 import lk.ijse.hms.dao.DaoTypes;
@@ -139,6 +141,74 @@ public class RoomBOImpl implements RoomBO {
         Session session = FactoryConfiguration.getInstance().getSession();
         try {
             return queryDAO.findAllReservationDetails(session).stream().map(objects -> convertor.fromCustom(objects)).collect(Collectors.toList());
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<CustomDTO> searchBookByText(String text) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        try {
+            return queryDAO.findAllReservationDetailsByText(text, session).stream().map(objects -> convertor.fromCustom(objects)).collect(Collectors.toList());
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public boolean saveRoom(RoomDTO roomDTO) throws DuplicateException{
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            if (roomDAO.findByPk(roomDTO.getRoomTypeId(), session).isPresent())
+                throw new DuplicateException();
+            roomDAO.save(convertor.toRoom(roomDTO), session);
+            transaction.commit();
+            return true;
+        }catch (DuplicateException e){
+            throw new DuplicateException();
+        }catch (Exception e){
+            transaction.rollback();
+            return false;
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public boolean updateBook(RoomDTO roomDTO) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            roomDAO.update(convertor.toRoom(roomDTO), session);
+            transaction.commit();
+            return true;
+        }catch (Exception e){
+            transaction.rollback();
+            return false;
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public boolean deleteRoom(RoomDTO roomDTO) throws InUseException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            if(queryDAO.findUnPaidReservationByRoomTypeId(roomDTO.getRoomTypeId(), session).size() > 0){
+                throw new InUseException();
+            }
+            roomDAO.deleteByPk(roomDTO.getRoomTypeId(), session);
+            transaction.commit();
+            return true;
+        }catch (InUseException e){
+            throw new InUseException();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
+            return false;
         }finally {
             session.close();
         }

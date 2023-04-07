@@ -3,6 +3,7 @@ package lk.ijse.hms.dao.custom.impl;
 import lk.ijse.hms.dao.custom.ReservationDAO;
 import lk.ijse.hms.dto.CustomDTO;
 import lk.ijse.hms.entity.Reservation;
+import lk.ijse.hms.entity.Room;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -29,9 +30,8 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public void deleteByPk(Reservation reservation, Session session) {
-        session.delete(reservation);
-
+    public void deleteByPk(String pk, Session session) {
+        session.delete(session.load(Reservation.class, pk));
     }
 
     @Override

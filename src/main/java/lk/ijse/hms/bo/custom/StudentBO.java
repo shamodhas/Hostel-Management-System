@@ -1,6 +1,8 @@
 package lk.ijse.hms.bo.custom;
 
 import lk.ijse.hms.bo.SuperBO;
+import lk.ijse.hms.bo.exception.DuplicateException;
+import lk.ijse.hms.bo.exception.InUseException;
 import lk.ijse.hms.dto.StudentDTO;
 
 import java.util.Arrays;
@@ -18,4 +20,10 @@ public interface StudentBO extends SuperBO {
     List<StudentDTO> searchBookByText(String text);
 
     StudentDTO getStudentById(String studentId);
+
+    boolean saveStudent(StudentDTO studentDTO) throws DuplicateException;
+
+    boolean updateStudent(StudentDTO studentDTO);
+
+    boolean deleteStudent(StudentDTO studentDTO) throws InUseException;
 }

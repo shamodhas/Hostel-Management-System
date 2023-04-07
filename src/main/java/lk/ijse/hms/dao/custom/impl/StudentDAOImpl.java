@@ -1,6 +1,7 @@
 package lk.ijse.hms.dao.custom.impl;
 
 import lk.ijse.hms.dao.custom.StudentDAO;
+import lk.ijse.hms.entity.Room;
 import lk.ijse.hms.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -27,8 +28,8 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public void deleteByPk(Student student, Session session) {
-        session.delete(student);
+    public void deleteByPk(String pk, Session session) {
+        session.delete(session.load(Student.class, pk));
     }
 
     @Override

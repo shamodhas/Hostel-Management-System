@@ -1,6 +1,7 @@
 package lk.ijse.hms.bo.custom.impl;
 
 import lk.ijse.hms.bo.custom.LoginBO;
+import lk.ijse.hms.bo.exception.DuplicateException;
 import lk.ijse.hms.bo.exception.NotFoundException;
 import lk.ijse.hms.bo.util.Convertor;
 import lk.ijse.hms.dao.DaoFactory;
@@ -10,6 +11,7 @@ import lk.ijse.hms.dto.UserDTO;
 import lk.ijse.hms.entity.User;
 import lk.ijse.hms.util.FactoryConfiguration;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,10 +29,12 @@ public class LoginBOImpl implements LoginBO {
     @Override
     public UserDTO verifyUser(UserDTO userDTO) throws NotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
-        Optional<User> optional = userDAO.findByUserNamePassword(userDTO.getUserName(), userDTO.getPassword(), session);
+        Optional<User> optional = userDAO.findByUserName(userDTO.getUserName(), session);
         session.close();
         if (optional.isPresent()){
-            return convertor.fromUser(optional.get());
+            if (optional.get().getPassword().equals(userDTO.getPassword())){
+                return convertor.fromUser(optional.get());
+            }
         }
         throw new NotFoundException("user name or password is wrong ..!");
     }
@@ -50,6 +54,40 @@ public class LoginBOImpl implements LoginBO {
         Session session = FactoryConfiguration.getInstance().getSession();
         try {
             return userDAO.search(text, session).stream().map(user -> convertor.fromUser(user)).collect(Collectors.toList());
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public String getNextUserId() {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        try {
+            Optional<String> optional = userDAO.getLastPk(session);
+            if (optional.isPresent()) {
+                return String.format("U-%04d", Integer.parseInt(optional.get().substring(2))+1);
+            }
+            return "U-0001";
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public boolean saveUser(UserDTO userDTO) throws DuplicateException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            if (userDAO.findByUserName(userDTO.getUserName(), session).isPresent())
+                throw new DuplicateException();
+            userDAO.save(convertor.toUser(userDTO), session);
+            transaction.commit();
+            return true;
+        }catch (DuplicateException e){
+            throw new DuplicateException();
+        }catch (Exception e){
+            transaction.rollback();
+            return false;
         }finally {
             session.close();
         }

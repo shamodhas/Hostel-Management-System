@@ -18,6 +18,8 @@ import lk.ijse.hms.view.tm.ReservationDetailTM;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -41,7 +43,7 @@ public class ManageReservationFormController {
         refreshTable();
     }
 
-    private void refreshTable() {
+    public void refreshTable() {
         tblReservation.setItems(FXCollections.observableArrayList(roomBO.getAllReservation().stream().map(
                 customDTO -> new ReservationDetailTM(
                         customDTO.getReservationId(),
@@ -54,6 +56,27 @@ public class ManageReservationFormController {
                         customDTO.getDate()
                 )
         ).collect(Collectors.toList())));
+
+        txtSearch.textProperty().addListener((observableValue, pre, text) ->{
+            if (!Objects.equals(pre, text)){
+                tblReservation.getItems().clear();
+                List<ReservationDetailTM> bookList = roomBO.searchBookByText(text).stream().map(
+                        customDTO -> new ReservationDetailTM(
+                                customDTO.getReservationId(),
+                                customDTO.getStudentId(),
+                                customDTO.getName(),
+                                customDTO.getRoomTypeId(),
+                                customDTO.getType(),
+                                customDTO.getKeyMoney(),
+                                customDTO.getStatus().toString(),
+                                customDTO.getDate()
+                        )
+                ).collect(Collectors.toList());
+                tblReservation.setItems(FXCollections.observableArrayList(bookList));
+            }
+
+        } );
+
     }
 
     @FXML

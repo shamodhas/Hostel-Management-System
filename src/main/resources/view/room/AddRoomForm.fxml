@@ -18,7 +18,7 @@
          <children>
             <ImageView fitHeight="139.0" fitWidth="134.0" layoutX="19.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="0.0">
                <image>
-                  <Image url="@../../assets/Add_user_icon.png" />
+                  <Image url="@../../assets/door_plus_icon.png" />
                </image>
                <effect>
                   <DropShadow />
@@ -36,7 +36,7 @@
             <VBox spacing="10.0">
                <children>
                   <Label text="ROOM TYPE ID :" />
-                  <JFXTextField fx:id="txtRoomTypeId" editable="false" />
+                  <JFXTextField fx:id="txtRoomTypeId" onAction="#txtRoomTypeIdOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. RM-1234" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="10.0" spacing="10.0">
@@ -48,13 +48,13 @@
             <VBox layoutX="10.0" layoutY="87.0" spacing="10.0">
                <children>
                   <Label text="KEY MONEY :" />
-                  <JFXTextField fx:id="txtKeyMoney" onAction="#txtKeyMoneyOnAction" onKeyReleased="#txtKeyMoneyKeyReleased" promptText="Ex. 1200.00" />
+                  <JFXTextField fx:id="txtKeyMoney" onAction="#txtKeyMoneyOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. 1200.00" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="164.0" spacing="10.0">
                <children>
                   <Label text="QUANTITY :" />
-                  <JFXTextField fx:id="txtQty" onAction="#txtQtyOnAction" onKeyReleased="#txtQtyKeyReleased" promptText="Ex. 10" />
+                  <JFXTextField fx:id="txtQty" onAction="#txtQtyOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. 10" />
                </children>
             </VBox>
             <JFXButton fx:id="btnAdd" onAction="#btnAddOnAction" prefWidth="120.0" style="-fx-background-color: #2ecc71;" text="Add" textFill="WHITE">

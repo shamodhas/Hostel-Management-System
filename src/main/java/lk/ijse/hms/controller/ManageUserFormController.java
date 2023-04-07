@@ -16,11 +16,8 @@ import javafx.stage.Stage;
 import lk.ijse.hms.bo.BoFactory;
 import lk.ijse.hms.bo.BoTypes;
 import lk.ijse.hms.bo.custom.LoginBO;
-import lk.ijse.hms.controller.student.AddStudentFormController;
-import lk.ijse.hms.controller.student.UpdateStudentFormController;
 import lk.ijse.hms.controller.user.AddUserFormController;
 import lk.ijse.hms.controller.user.UpdateUserFormController;
-import lk.ijse.hms.view.tm.StudentTM;
 import lk.ijse.hms.view.tm.UserTM;
 
 import java.io.IOException;
@@ -53,10 +50,10 @@ public class ManageUserFormController {
     public void initialize(){
         btnUpdateDelete.setDisable(true);
         setCellFactory();
-        loadTable();
+        refreshTable();
     }
 
-    private void loadTable() {
+    public void refreshTable() {
         tblUser.setItems(FXCollections.observableArrayList(loginBO.getAllUser().stream().map(userDTO -> new UserTM(
                         userDTO.getUserId(),
                         userDTO.getName(),
@@ -106,7 +103,7 @@ public class ManageUserFormController {
             FXMLLoader fxmlLoader = new FXMLLoader(resource);
             Parent load = fxmlLoader.load();
             AddUserFormController addUserFormController = fxmlLoader.getController();
-            addUserFormController.init(tblUser, this);
+            addUserFormController.init(this);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(load));

@@ -29,8 +29,8 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public void deleteByPk(Room room, Session session) {
-        session.delete(room);
+    public void deleteByPk(String pk, Session session) {
+        session.delete(session.load(Room.class, pk));
     }
 
     @Override

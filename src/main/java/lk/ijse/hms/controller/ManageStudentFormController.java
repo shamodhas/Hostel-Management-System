@@ -22,8 +22,6 @@ import lk.ijse.hms.view.tm.StudentTM;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -53,10 +51,10 @@ public class ManageStudentFormController {
     public void initialize(){
         btnUpdateDelete.setDisable(true);
         setCellFactory();
-        loadTable();
+        refreshTable();
     }
 
-    private void loadTable() {
+    public void refreshTable() {
         tblStudent.setItems(FXCollections.observableArrayList(studentBO.getAllStudent().stream().map(studentDTO -> new StudentTM(
                 studentDTO.getStudentId(),
                 studentDTO.getName(),
@@ -106,7 +104,7 @@ public class ManageStudentFormController {
             FXMLLoader fxmlLoader = new FXMLLoader(resource);
             Parent load = fxmlLoader.load();
             AddStudentFormController addStudentFormController = fxmlLoader.getController();
-            addStudentFormController.init(tblStudent, this);
+            addStudentFormController.init(this);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(load));

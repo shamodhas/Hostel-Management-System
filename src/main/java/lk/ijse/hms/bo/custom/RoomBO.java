@@ -1,9 +1,12 @@
 package lk.ijse.hms.bo.custom;
 
 import lk.ijse.hms.bo.SuperBO;
+import lk.ijse.hms.bo.exception.DuplicateException;
+import lk.ijse.hms.bo.exception.InUseException;
 import lk.ijse.hms.dto.CustomDTO;
 import lk.ijse.hms.dto.RoomDTO;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,4 +31,12 @@ public interface RoomBO extends SuperBO {
     boolean addReservation(CustomDTO customDTO);
 
     List<CustomDTO> getAllReservation();
+
+    List<CustomDTO> searchBookByText(String text);
+
+    boolean saveRoom(RoomDTO roomDTO) throws DuplicateException;
+
+    boolean updateBook(RoomDTO roomDTO);
+
+    boolean deleteRoom(RoomDTO roomDTO) throws InUseException;
 }
