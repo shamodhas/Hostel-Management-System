@@ -15,7 +15,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class UnPaidPaymentTM {
+public class ReservationDetailTM {
     String reservationId;
     String studentId;
     String name;

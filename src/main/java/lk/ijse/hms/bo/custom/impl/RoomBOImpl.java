@@ -7,8 +7,12 @@ import lk.ijse.hms.dao.DaoTypes;
 import lk.ijse.hms.dao.custom.QueryDAO;
 import lk.ijse.hms.dao.custom.ReservationDAO;
 import lk.ijse.hms.dao.custom.RoomDAO;
+import lk.ijse.hms.dao.custom.StudentDAO;
 import lk.ijse.hms.dto.CustomDTO;
 import lk.ijse.hms.dto.RoomDTO;
+import lk.ijse.hms.entity.Reservation;
+import lk.ijse.hms.entity.Room;
+import lk.ijse.hms.entity.Student;
 import lk.ijse.hms.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -28,6 +32,7 @@ public class RoomBOImpl implements RoomBO {
     private final RoomDAO roomDAO = DaoFactory.getInstance().getDAO(DaoTypes.ROOM);
     private final QueryDAO queryDAO = DaoFactory.getInstance().getDAO(DaoTypes.QUERY);
     private final ReservationDAO reservationDAO = DaoFactory.getInstance().getDAO(DaoTypes.RESERVATION);
+    private final StudentDAO studentDAO = DaoFactory.getInstance().getDAO(DaoTypes.STUDENT);
     @Override
     public List<RoomDTO> getAllRoom() {
         Session session = FactoryConfiguration.getInstance().getSession();
@@ -52,7 +57,7 @@ public class RoomBOImpl implements RoomBO {
     public List<CustomDTO> getAllUnPaidReservation() {
         Session session = FactoryConfiguration.getInstance().getSession();
         try {
-            return queryDAO.findAllUnPaidReservation(session).stream().map(custom -> convertor.fromCustom(custom)).collect(Collectors.toList());
+            return queryDAO.findAllUnPaidReservationDetails(session).stream().map(custom -> convertor.fromCustom(custom)).collect(Collectors.toList());
         }finally {
             session.close();
         }
@@ -82,11 +87,61 @@ public class RoomBOImpl implements RoomBO {
         try {
             Optional<String> optional = reservationDAO.getLastPk(session);
             if (optional.isPresent()) {
-                return String.format("R%03d", Integer.parseInt(optional.get().substring(1))+1);
+                return String.format("RSV-%04d", Integer.parseInt(optional.get().substring(4))+1);
             }
-            return "R001";
+            return "RSV-0001";
         }finally {
             session.close();
         }
     }
+
+    @Override
+    public RoomDTO getRoomById(String roomTypeId) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        try {
+            return convertor.fromRoom(roomDAO.findByPk(roomTypeId, session).get());
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public boolean addReservation(CustomDTO customDTO) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            Optional<Student> studentOptional = studentDAO.findByPk(customDTO.getStudentId(), session);
+            Optional<Room> roomOptional = roomDAO.findByPk(customDTO.getRoomTypeId(), session);
+            if (studentOptional.isPresent() && roomOptional.isPresent()) {
+                Student student = studentOptional.get();
+                Room room = roomOptional.get();
+                room.setQty(room.getQty() - 1);
+
+                Reservation reservation = new Reservation(customDTO.getReservationId(), customDTO.getDate(), student, room, customDTO.getStatus().toString());
+
+                reservationDAO.save(reservation, session);
+                roomDAO.update(room, session);
+                transaction.commit();
+                return true;
+            }
+            throw new Exception();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
+            return false;
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<CustomDTO> getAllReservation() {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        try {
+            return queryDAO.findAllReservationDetails(session).stream().map(objects -> convertor.fromCustom(objects)).collect(Collectors.toList());
+        }finally {
+            session.close();
+        }
+    }
+
 }

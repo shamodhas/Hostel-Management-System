@@ -13,8 +13,7 @@ import lk.ijse.hms.bo.BoFactory;
 import lk.ijse.hms.bo.BoTypes;
 import lk.ijse.hms.bo.custom.RoomBO;
 import lk.ijse.hms.dto.CustomDTO;
-import lk.ijse.hms.view.tm.UnPaidPaymentTM;
-import lk.ijse.hms.view.tm.UserTM;
+import lk.ijse.hms.view.tm.ReservationDetailTM;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +30,7 @@ public class PaymentFormController {
     public JFXTextField txtKeyMoney;
 
     @FXML
-    private TableView<UnPaidPaymentTM> tblUnPaid;
+    private TableView<ReservationDetailTM> tblUnPaid;
 
     @FXML
     private JFXTextField txtReservationId;
@@ -63,7 +62,7 @@ public class PaymentFormController {
     }
 
     private void loadTable() {
-        List<UnPaidPaymentTM> paidPaymentTMList = roomBO.getAllUnPaidReservation().stream().map(customDTO -> new UnPaidPaymentTM(
+        List<ReservationDetailTM> paidPaymentTMList = roomBO.getAllUnPaidReservation().stream().map(customDTO -> new ReservationDetailTM(
                         customDTO.getReservationId(),
                         customDTO.getStudentId(),
                         customDTO.getName(),
@@ -73,13 +72,13 @@ public class PaymentFormController {
                         "UNPAID",
                         customDTO.getDate()
         )).collect(Collectors.toList());
-        ObservableList<UnPaidPaymentTM> unPaidPaymentTMS = FXCollections.observableArrayList(paidPaymentTMList);
+        ObservableList<ReservationDetailTM> unPaidPaymentTMS = FXCollections.observableArrayList(paidPaymentTMList);
         tblUnPaid.setItems(unPaidPaymentTMS);
 
         tblUnPaid.getSelectionModel().selectedItemProperty().addListener((observableValue, pre, curr) -> {
             if (curr!=pre || curr!=null){
                 btnPay.setDisable(false);
-                UnPaidPaymentTM tm = tblUnPaid.getSelectionModel().getSelectedItem();
+                ReservationDetailTM tm = tblUnPaid.getSelectionModel().getSelectedItem();
                 if (tm == null){
                     btnPay.setDisable(true);
                     return;

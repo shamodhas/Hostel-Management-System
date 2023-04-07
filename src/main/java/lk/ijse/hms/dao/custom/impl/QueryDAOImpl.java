@@ -15,8 +15,13 @@ import java.util.List;
 public class QueryDAOImpl implements QueryDAO {
 
     @Override
-    public List<Object[]> findAllUnPaidReservation(Session session) {
+    public List<Object[]> findAllUnPaidReservationDetails(Session session) {
         Query query = session.createQuery("SELECT re.resId,s.studentId,s.name,ro.roomTypeId,ro.type,ro.keyMoney,re.status,re.date FROM Reservation re JOIN Student s ON re.student = s.studentId JOIN Room ro ON re.room =ro.roomTypeId WHERE re.status = :status");
         return query.setParameter("status", "UNPAID").list();
+    }
+
+    @Override
+    public List<Object[]> findAllReservationDetails(Session session) {
+        return session.createQuery("SELECT re.resId,s.studentId,s.name,ro.roomTypeId,ro.type,ro.keyMoney,re.status,re.date FROM Reservation re JOIN Student s ON re.student = s.studentId JOIN Room ro ON re.room =ro.roomTypeId").list();
     }
 }

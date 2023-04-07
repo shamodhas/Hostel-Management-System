@@ -4,6 +4,7 @@ package lk.ijse.hms.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -20,7 +21,7 @@ public class Reservation implements SuperEntity{
     @Id
     @Column(name = "res_id")
     private String resId;
-    private LocalDate date;
+    private Date date;
 
     @ManyToOne
     @JoinColumn(name = "student_id")

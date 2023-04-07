@@ -12,5 +12,7 @@ import java.util.List;
  */
 
 public interface QueryDAO extends SuperDAO {
-    List<Object[]> findAllUnPaidReservation(Session session);
+    List<Object[]> findAllUnPaidReservationDetails(Session session);
+
+    List<Object[]> findAllReservationDetails(Session session);
 }

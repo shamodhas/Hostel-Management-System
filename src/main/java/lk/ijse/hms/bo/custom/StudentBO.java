@@ -16,4 +16,6 @@ public interface StudentBO extends SuperBO {
     List<StudentDTO> getAllStudent();
 
     List<StudentDTO> searchBookByText(String text);
+
+    StudentDTO getStudentById(String studentId);
 }

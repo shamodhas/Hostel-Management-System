@@ -22,4 +22,10 @@ public interface RoomBO extends SuperBO {
     boolean payReservationByReservationId(String reservationId, CustomDTO.Status paid);
 
     String getNextReservationId();
+
+    RoomDTO getRoomById(String roomTypeId);
+
+    boolean addReservation(CustomDTO customDTO);
+
+    List<CustomDTO> getAllReservation();
 }

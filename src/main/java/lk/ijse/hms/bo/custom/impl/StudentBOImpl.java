@@ -40,4 +40,14 @@ public class StudentBOImpl implements StudentBO {
             session.close();
         }
     }
+
+    @Override
+    public StudentDTO getStudentById(String studentId) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        try {
+            return convertor.fromStudent(studentDAO.findByPk(studentId, session).get());
+        }finally {
+            session.close();
+        }
+    }
 }

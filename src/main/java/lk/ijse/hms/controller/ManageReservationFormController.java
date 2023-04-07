@@ -1,25 +1,23 @@
 package lk.ijse.hms.controller;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.util.Callback;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import lk.ijse.hms.bo.BoFactory;
 import lk.ijse.hms.bo.BoTypes;
 import lk.ijse.hms.bo.custom.RoomBO;
-import lk.ijse.hms.bo.custom.StudentBO;
-import lk.ijse.hms.view.tm.CartTM;
+import lk.ijse.hms.controller.reservation.AddReservationFormController;
+import lk.ijse.hms.view.tm.ReservationDetailTM;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.stream.Collectors;
 
 /**
@@ -31,133 +29,60 @@ import java.util.stream.Collectors;
 public class ManageReservationFormController {
 
     @FXML
-    public TableColumn<CartTM, String> colAction;
+    private TableView<ReservationDetailTM> tblReservation;
 
     @FXML
-    public TableColumn<CartTM, String> colType;
-
-    @FXML
-    public TableColumn<CartTM, String> colRoomTypeId;
-
-    @FXML
-    public TableColumn<CartTM, Double> colKeyMoney;
-
-    @FXML
-    public TableColumn<CartTM, String> colStatus;
-    @FXML
-    private TableView<CartTM> tblCart;
-
-    @FXML
-    private JFXButton btnRegister;
-
-    @FXML
-    private Label lblReservation;
-
-    @FXML
-    private JFXComboBox<String> cmbStudentId;
-
-    @FXML
-    private JFXTextField txtName;
-
-    @FXML
-    private JFXTextField txtAddress;
-
-    @FXML
-    private JFXTextField txtContactNo;
-
-    @FXML
-    private JFXComboBox<String> cmbRoomTypeId;
-
-    @FXML
-    private JFXTextField txtType;
-
-    @FXML
-    private JFXTextField txtKeyMoney;
-
-    @FXML
-    private JFXTextField txtQty;
-
-    @FXML
-    private JFXComboBox<String> cmbPaymentStatus;
-
-    @FXML
-    private JFXButton btnAddToCart;
+    private TextField txtSearch;
 
     private final RoomBO roomBO = BoFactory.getInstance().getBO(BoTypes.ROOM);
-    private final StudentBO studentBO = BoFactory.getInstance().getBO(BoTypes.STUDENT);
 
     public void initialize(){
         setCellFactory();
-        loadReservationId();
-        loadCombo();
+        refreshTable();
     }
 
-    private void loadReservationId() {
-        lblReservation.setText(roomBO.getNextReservationId());
+    private void refreshTable() {
+        tblReservation.setItems(FXCollections.observableArrayList(roomBO.getAllReservation().stream().map(
+                customDTO -> new ReservationDetailTM(
+                        customDTO.getReservationId(),
+                        customDTO.getStudentId(),
+                        customDTO.getName(),
+                        customDTO.getRoomTypeId(),
+                        customDTO.getType(),
+                        customDTO.getKeyMoney(),
+                        customDTO.getStatus().toString(),
+                        customDTO.getDate()
+                )
+        ).collect(Collectors.toList())));
     }
 
-    private void loadCombo() {
-        cmbStudentId.getItems().addAll(studentBO.getAllStudent().stream().map(studentDTO -> studentDTO.getStudentId()).collect(Collectors.toList()));
-        cmbRoomTypeId.getItems().addAll(roomBO.getAllRoom().stream().map(roomDTO -> roomDTO.getRoomTypeId()).collect(Collectors.toList()));
-        cmbPaymentStatus.getItems().addAll("PAID", "UNPAID");
+    @FXML
+    void btnAddNewReservation(ActionEvent event) {
+        try {
+            URL resource = this.getClass().getResource("/view/reservation/AddReservationForm.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(resource);
+            Parent load = fxmlLoader.load();
+            AddReservationFormController addReservationFormController = fxmlLoader.getController();
+            addReservationFormController.init(this);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(load));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("New Reservation Registration Form");
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setCellFactory() {
-        colRoomTypeId.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("roomTypeId"));
-        colType.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("type"));
-        colKeyMoney.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("keyMoney"));
-        colStatus.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("status"));
-        Callback<TableColumn<CartTM, String>, TableCell<CartTM, String>> cellFactory = (TableColumn<CartTM, String> param) -> {
-            // make cell containing buttons
-            final TableCell<CartTM, String> cell = new TableCell<CartTM, String>() {
-                @Override
-                public void updateItem(String uItem, boolean empty) {
-                    super.updateItem(uItem, empty);
-                    //that cell created only on non-empty rows
-                    if (empty) {
-                        setGraphic(null);
-                        setText(null);
-                    } else {
-                        FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
-                        deleteIcon.setStyle(" -fx-cursor: hand ;" + "-glyph-size:28px;" + "-fx-fill:#ff1744;");
-                        deleteIcon.setOnMouseClicked((MouseEvent event) -> {
-                            CartTM cartTM = tblCart.getSelectionModel().getSelectedItem();
-
-                        });
-                        HBox hBox = new HBox(deleteIcon);
-                        hBox.setStyle("-fx-alignment:center");
-                        HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
-                        setGraphic(hBox);
-                        setText(null);
-                    }
-                }
-            };
-            return cell;
-        };
-        colAction.setCellFactory(cellFactory);
+        tblReservation.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("reservationId"));
+        tblReservation.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("studentId"));
+        tblReservation.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("name"));
+        tblReservation.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("roomTypeId"));
+        tblReservation.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("type"));
+        tblReservation.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("keyMoney"));
+        tblReservation.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("status"));
+        tblReservation.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("date"));
     }
-
-    @FXML
-    void btnAddToCartOnAction(ActionEvent event) {
-        tblCart.setItems(FXCollections.observableArrayList(new CartTM()));
-        tblCart.setItems(FXCollections.observableArrayList(new CartTM()));
-        tblCart.setItems(FXCollections.observableArrayList(new CartTM()));
-        tblCart.setItems(FXCollections.observableArrayList(new CartTM()));
-    }
-
-    @FXML
-    void btnRegisterOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void cmbRoomTypeIdOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void cmbStudentIdOnAction(ActionEvent event) {
-
-    }
-
 }
