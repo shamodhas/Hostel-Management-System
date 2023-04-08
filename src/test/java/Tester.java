@@ -7,6 +7,8 @@ import lk.ijse.hms.dao.DaoTypes;
 import lk.ijse.hms.dao.SuperDAO;
 import lk.ijse.hms.dao.custom.UserDAO;
 import lk.ijse.hms.dto.CustomDTO;
+import lk.ijse.hms.dto.UserDTO;
+import lk.ijse.hms.view.tm.UserTM;
 
 
 import java.util.List;
@@ -19,7 +21,6 @@ import java.util.List;
 
 public class Tester {
     public static void main(String[] args) {
-        System.out.println(CustomDTO.Status.PAID.toString());
-        String s = String.valueOf(CustomDTO.Status.PAID);
+
     }
 }

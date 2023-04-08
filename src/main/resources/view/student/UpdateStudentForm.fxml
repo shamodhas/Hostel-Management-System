@@ -46,13 +46,13 @@
             <VBox layoutX="10.0" layoutY="87.0" spacing="10.0">
                <children>
                   <Label text="ADDRESS :" />
-                  <JFXTextField fx:id="txtAddress" onAction="#txtAddressOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. Kurunegala" />
+                  <JFXTextField fx:id="txtAddress" focusTraversable="false" onAction="#txtAddressOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. Kurunegala" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="164.0" spacing="10.0">
                <children>
                   <Label text="CONTACT NO :" />
-                  <JFXTextField fx:id="txtContact" onAction="#txtContactOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. 0712345678" />
+                  <JFXTextField fx:id="txtContact" focusTraversable="false" onAction="#txtContactOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. 0712345678" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="241.0" spacing="10.0">
@@ -64,7 +64,7 @@
             <VBox layoutX="10.0" layoutY="318.0" spacing="10.0">
                <children>
                   <Label text="GENDER :" />
-                  <JFXComboBox fx:id="cmbGender" onAction="#cmbGenderOnAction" prefHeight="25.0" prefWidth="371.0" promptText="Select" />
+                  <JFXComboBox fx:id="cmbGender" focusTraversable="false" onAction="#cmbGenderOnAction" prefHeight="25.0" prefWidth="371.0" promptText="Select" />
                </children>
             </VBox>
          </children>

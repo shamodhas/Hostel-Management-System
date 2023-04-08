@@ -39,7 +39,7 @@
             <VBox spacing="10.0">
                <children>
                   <Label text="User ID :" />
-                  <JFXTextField fx:id="txtId" editable="false" />
+                  <JFXTextField fx:id="txtId" editable="false" focusTraversable="false" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="10.0" spacing="10.0">
@@ -51,25 +51,25 @@
             <VBox layoutX="10.0" layoutY="164.0" spacing="10.0">
                <children>
                   <Label text="CONTACT NO :" />
-                  <JFXTextField fx:id="txtContact" onAction="#txtContactOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. 0712345678" />
+                  <JFXTextField fx:id="txtContact" focusTraversable="false" onAction="#txtContactOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. 0712345678" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="144.0" spacing="10.0">
                <children>
                   <Label text="EMAIL :" />
-                  <JFXTextField fx:id="txtEmail" onAction="#txtEmailOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. shamodha@gmail.com" />
+                  <JFXTextField fx:id="txtEmail" focusTraversable="false" onAction="#txtEmailOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. shamodha@gmail.com" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="211.0" spacing="10.0">
                <children>
                   <Label text="USER NAME :" />
-                  <JFXTextField fx:id="txtUserName" onAction="#txtUserNameOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. shamodha2000" />
+                  <JFXTextField fx:id="txtUserName" focusTraversable="false" onAction="#txtUserNameOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. shamodha2000" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="278.0" spacing="10.0">
                <children>
                   <Label text="PASSWORD :" />
-                  <JFXTextField fx:id="txtPassword" onAction="#txtPasswordOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. Shamodha2000@" />
+                  <JFXTextField fx:id="txtPassword" focusTraversable="false" onAction="#txtPasswordOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. Shamodha2000@" />
                </children>
             </VBox>
          </children>

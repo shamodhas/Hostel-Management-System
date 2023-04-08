@@ -8,25 +8,25 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import lk.ijse.hms.bo.BoFactory;
 import lk.ijse.hms.bo.BoTypes;
 import lk.ijse.hms.bo.custom.LoginBO;
 import lk.ijse.hms.bo.exception.NotFoundException;
-import lk.ijse.hms.controller.student.AddStudentFormController;
 import lk.ijse.hms.controller.user.AddUserFormController;
 import lk.ijse.hms.dto.UserDTO;
-import lk.ijse.hms.entity.User;
 
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * Created By shamodha_s_rathnamalala
@@ -95,6 +95,7 @@ public class LoginFormController {
                 MainFormController mainFormController = fxmlLoader.getController();
                 mainFormController.init(userDTO);
                 Stage stage = new Stage();
+                stage.setTitle("Dashboard");
                 stage.setScene(new Scene(load));
                 stage.initModality(Modality.WINDOW_MODAL);
                 stage.centerOnScreen();
@@ -147,5 +148,16 @@ public class LoginFormController {
     public void init(UserDTO userDTO) {
         txtUserName.setText(userDTO.getUserName());
         (isHide?pfPassword:txtPassword).setText(userDTO.getPassword());
+    }
+
+    @FXML
+    public void txtUserNameOnAction(ActionEvent actionEvent) {
+        if (isHide) pfPassword.requestFocus();
+        else txtPassword.requestFocus();
+    }
+
+    @FXML
+    public void passwordOnAction(ActionEvent actionEvent) {
+        btnLoginOnAction(actionEvent);
     }
 }

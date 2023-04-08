@@ -2,7 +2,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import lk.ijse.hms.util.Navigation;
 
 import java.net.URL;
@@ -21,9 +23,13 @@ public class AppInitializer extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Navigation.setStage(stage);
-        URL resource = this.getClass().getResource("/view/ManageUserForm.fxml");
+        URL resource = this.getClass().getResource("/view/LoginForm.fxml");
         Parent load = FXMLLoader.load(resource);
-        stage.setScene(new Scene(load));
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setTitle("Login");
+        Scene scene = new Scene(load);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
     }

@@ -59,9 +59,6 @@ public class AddReservationFormController {
     @FXML
     private JFXComboBox<String> cmbPaymentStatus;
 
-    @FXML
-    private JFXButton btnAddToCart;
-
     private ManageReservationFormController manageReservationFormController;
 
     private final RoomBO roomBO = BoFactory.getInstance().getBO(BoTypes.ROOM);
@@ -70,18 +67,7 @@ public class AddReservationFormController {
 
     public void init(ManageReservationFormController manageReservationFormController) {
         this.manageReservationFormController = manageReservationFormController;
-    }
-
-    public void initialize(){
-        loadReservationId();
-        loadCombo();
-    }
-
-    private void loadReservationId() {
         lblReservation.setText(roomBO.getNextReservationId());
-    }
-
-    private void loadCombo() {
         cmbStudentId.getItems().addAll(studentBO.getAllStudent().stream().map(studentDTO -> studentDTO.getStudentId()).collect(Collectors.toList()));
         cmbRoomTypeId.getItems().addAll(roomBO.getAllRoom().stream().map(roomDTO -> roomDTO.getRoomTypeId()).collect(Collectors.toList()));
         cmbPaymentStatus.getItems().addAll("PAID", "UNPAID");
@@ -150,5 +136,4 @@ public class AddReservationFormController {
             txtContactNo.clear();
         }
     }
-
 }

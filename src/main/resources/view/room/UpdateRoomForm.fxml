@@ -43,13 +43,13 @@
             <VBox layoutX="10.0" layoutY="87.0" spacing="10.0">
                <children>
                   <Label text="KEY MONEY :" />
-                  <JFXTextField fx:id="txtKeyMoney" labelFloat="true" onKeyReleased="#txtKeyReleased" />
+                  <JFXTextField fx:id="txtKeyMoney" focusTraversable="false" labelFloat="true" onKeyReleased="#txtKeyReleased" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="164.0" spacing="10.0">
                <children>
                   <Label text="QUANTITY :" />
-                  <JFXTextField fx:id="txtQty" onKeyReleased="#txtKeyReleased" />
+                  <JFXTextField fx:id="txtQty" focusTraversable="false" onKeyReleased="#txtKeyReleased" />
                </children>
             </VBox>
             <HBox alignment="CENTER" spacing="70.0">

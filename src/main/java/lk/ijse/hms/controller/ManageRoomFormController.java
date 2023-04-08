@@ -37,12 +37,6 @@ public class ManageRoomFormController {
     private TableView<RoomTM> tblRoom;
 
     @FXML
-    private JFXButton btnBack;
-
-    @FXML
-    private JFXButton btnAddRoom;
-
-    @FXML
     private JFXButton btnUpdateDelete;
 
     @FXML
@@ -112,7 +106,7 @@ public class ManageRoomFormController {
             Stage stage = new Stage();
             stage.setScene(new Scene(load));
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Update/Delete Room details");
+            stage.setTitle("Update and Delete Room details");
             stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {

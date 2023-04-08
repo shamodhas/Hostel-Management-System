@@ -13,12 +13,13 @@ import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import lk.ijse.hms.controller.student.AddStudentFormController;
+import lk.ijse.hms.controller.login.AdminLoginFormController;
 import lk.ijse.hms.controller.user.UserDetailsFormController;
 import lk.ijse.hms.dto.UserDTO;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created By shamodha_s_rathnamalala
@@ -52,60 +53,64 @@ public class MainFormController {
     @FXML
     private Label lblUserStatus;
 
-    @FXML
-    private Label lblDate;
+    private UserDTO userDTO;
 
-    private static UserDTO userDTO;
+    private final List<JFXButton> buttonList = new ArrayList<>();
 
     public void init(UserDTO userDTO) {
-        MainFormController.userDTO = userDTO;
-    }
-
-    public void initialize(){
-        if (userDTO != null) {
-            lblUserStatus.setText(userDTO.getName());
-        }
-        lblDate.setText(String.valueOf(LocalDate.now()));
+        this.userDTO = userDTO;
+        lblUserStatus.setText(userDTO.getName());
+        buttonList.add(btnDashboard);
+        buttonList.add(btnStudent);
+        buttonList.add(btnRoom);
+        buttonList.add(btnReservation);
+        buttonList.add(btnPayment);
+        buttonList.add(btnUser);
         navigation("/view/DashboardForm.fxml");
     }
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) {
+        btnOnAction(btnDashboard);
         navigation("/view/DashboardForm.fxml");
+        ((Stage)pneContainer.getScene().getWindow()).setTitle("Dashboard");
     }
 
     @FXML
     void btnPaymentOnAction(ActionEvent event) {
+        btnOnAction(btnPayment);
         navigation("/view/PaymentForm.fxml");
+        ((Stage)pneContainer.getScene().getWindow()).setTitle("Manage Payment");
     }
 
     @FXML
     void btnReservationOnAction(ActionEvent event) {
+        btnOnAction(btnReservation);
         navigation("/view/ManageReservationForm.fxml");
+        ((Stage)pneContainer.getScene().getWindow()).setTitle("Manage Reservation");
     }
 
     @FXML
     void btnRoomOnAction(ActionEvent event) {
+        btnOnAction(btnRoom);
         navigation("/view/ManageRoomForm.fxml");
+        ((Stage)pneContainer.getScene().getWindow()).setTitle("Manage Room");
     }
 
     @FXML
     void btnStudentOnAction(ActionEvent event) {
+        btnOnAction(btnStudent);
         navigation("/view/ManageStudentForm.fxml");
+        ((Stage)pneContainer.getScene().getWindow()).setTitle("Manage Student");
     }
 
     @FXML
     void btnUserOnAction(ActionEvent event) {
-        navigation("/view/ManageUserForm.fxml");
-    }
-
-    @FXML
-    void imgMouseClock(MouseEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/user/UserDetailsForm.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/login/AdminLoginForm.fxml"));
             Parent load = fxmlLoader.load();
-            UserDetailsFormController userDetailsFormController = fxmlLoader.getController();
-            userDetailsFormController.init(userDTO);
+            AdminLoginFormController adminLoginFormController = fxmlLoader.getController();
+            adminLoginFormController.init(this);
             Stage stage = new Stage();
             stage.setScene(new Scene(load));
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -116,14 +121,40 @@ public class MainFormController {
         }
     }
 
+    public void goUserOnAction(){
+        btnOnAction(btnUser);
+        navigation("/view/ManageUserForm.fxml");
+        ((Stage)pneContainer.getScene().getWindow()).setTitle("Manage User");
+    }
+
     @FXML
-    void logOutOnAction(ActionEvent event) {
+    void imgMouseClock(MouseEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/user/UserDetailsForm.fxml"));
+            Parent load = fxmlLoader.load();
+            UserDetailsFormController userDetailsFormController = fxmlLoader.getController();
+            userDetailsFormController.init(userDTO, this);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(load));
+            stage.setTitle("User Details");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR,"forms error ..!").show();
+        }
+    }
+
+    @FXML
+    public void logOutOnAction(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/LoginForm.fxml"));
             Parent load = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(load));
             stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setTitle("Login");
             stage.centerOnScreen();
             stage.show();
             Stage window = (Stage) pneContainer.getScene().getWindow();
@@ -141,5 +172,14 @@ public class MainFormController {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR,"forms error ..!").show();
         }
+    }
+
+    private void btnOnAction(JFXButton selectedBTN){
+        for (JFXButton jfxButton:buttonList){
+            jfxButton.getStyleClass().removeAll("selected-nav-btn");
+            jfxButton.getStyleClass().addAll("nav-btn");
+        }
+        selectedBTN.getStyleClass().removeAll("nav-btn");
+        selectedBTN.getStyleClass().addAll("selected-nav-btn");
     }
 }

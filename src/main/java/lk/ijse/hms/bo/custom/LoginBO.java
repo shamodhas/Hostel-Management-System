@@ -24,4 +24,8 @@ public interface LoginBO extends SuperBO{
     String getNextUserId();
 
     boolean saveUser(UserDTO userDTO) throws DuplicateException;
+
+    boolean updateUser(UserDTO userDTO) throws DuplicateException;
+
+    boolean deleteUser(UserDTO userDTO);
 }

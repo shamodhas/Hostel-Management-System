@@ -106,7 +106,7 @@
             <Insets bottom="10.0" top="10.0" />
          </padding>
       </VBox>
-      <JFXButton layoutX="525.0" layoutY="357.0" onAction="#btnUpdateOnAction" style="-fx-background-color: #27ae60;" text="Update" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+      <JFXButton layoutX="525.0" layoutY="357.0" fx:id="btnUpdate" onAction="#btnUpdateOnAction" style="-fx-background-color: #27ae60;" text="Update" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <font>
             <Font size="13.0" />
          </font>

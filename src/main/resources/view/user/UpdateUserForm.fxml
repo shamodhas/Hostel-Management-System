@@ -22,7 +22,7 @@
                   <DropShadow />
                </effect>
             </ImageView>
-            <Label fx:id="lblStudentId" alignment="CENTER" layoutY="155.0" prefHeight="25.0" prefWidth="159.0" text="U001">
+            <Label fx:id="lblUserId" alignment="CENTER" layoutY="155.0" prefHeight="25.0" prefWidth="159.0" text="U001">
                <font>
                   <Font name="DejaVu Serif Bold" size="16.0" />
                </font>
@@ -39,31 +39,31 @@
             <VBox layoutX="10.0" layoutY="10.0" spacing="10.0">
                <children>
                   <Label text="NAME :" />
-                  <JFXTextField fx:id="txtName" onAction="#txtNameOnAction" onKeyReleased="#txtNameReleasedOnAction" prefWidth="371.0" promptText="Ex. Shamodha" />
+                  <JFXTextField fx:id="txtName" onAction="#txtNameOnAction" onKeyReleased="#txtKeyReleased" prefWidth="371.0" promptText="Ex. Shamodha" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="164.0" spacing="10.0">
                <children>
                   <Label text="CONTACT NO :" />
-                  <JFXTextField fx:id="txtContact" onAction="#txtContactOnAction" onKeyReleased="#txtContactReleasedOnAction" prefWidth="371.0" promptText="Ex. 0712345678" />
+                  <JFXTextField fx:id="txtContact" focusTraversable="false" onAction="#txtContactOnAction" onKeyReleased="#txtKeyReleased" prefWidth="371.0" promptText="Ex. 0712345678" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="77.0" spacing="10.0">
                <children>
                   <Label text="EMAIL :" />
-                  <JFXTextField fx:id="txtContact1" onAction="#txtContactOnAction" onKeyReleased="#txtEmailReleasedOnAction" prefWidth="371.0" promptText="Ex. shamodha@gmail.com" />
+                  <JFXTextField fx:id="txtEmail" focusTraversable="false" onAction="#txtEmailOnAction" onKeyReleased="#txtKeyReleased" prefWidth="371.0" promptText="Ex. shamodha@gmail.com" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="144.0" spacing="10.0">
                <children>
                   <Label text="USER NAME :" />
-                  <JFXTextField fx:id="txtContact11" onAction="#txtContactOnAction" onKeyReleased="#OnActionReleasedOnAction" prefWidth="371.0" promptText="Ex. shamodha2000" />
+                  <JFXTextField fx:id="txtUserName" focusTraversable="false" onAction="#txtUserNameOnAction" onKeyReleased="#txtKeyReleased" prefWidth="371.0" promptText="Ex. shamodha2000" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="211.0" spacing="10.0">
                <children>
                   <Label text="PASSWORD :" />
-                  <JFXTextField fx:id="txtContact111" onAction="#txtContactOnAction" onKeyReleased="#txtPasswordReleasedOnAction" prefWidth="371.0" promptText="Ex. Shamodha2000@" />
+                  <JFXTextField fx:id="txtPassword" focusTraversable="false" onAction="#txtPasswordOnAction" onKeyReleased="#txtKeyReleased" prefWidth="371.0" promptText="Ex. Shamodha2000@" />
                </children>
             </VBox>
          </children>

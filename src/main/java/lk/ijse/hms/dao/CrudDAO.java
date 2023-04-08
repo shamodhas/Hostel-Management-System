@@ -26,6 +26,4 @@ public interface CrudDAO<T extends SuperEntity,ID extends Serializable> extends 
 
     Optional<String> getLastPk(Session session);
 
-    long count(Session session);
-
 }

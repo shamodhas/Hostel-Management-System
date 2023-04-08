@@ -1,5 +1,6 @@
 package lk.ijse.hms.controller.user;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lk.ijse.hms.controller.MainFormController;
 import lk.ijse.hms.dto.UserDTO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -20,6 +22,9 @@ import java.io.IOException;
  */
 
 public class UserDetailsFormController {
+
+    @FXML
+    public JFXButton btnUpdate;
     @FXML
     private Label lblUserId;
 
@@ -39,19 +44,17 @@ public class UserDetailsFormController {
     private Label lblPassword;
 
     private UserDTO userDTO;
-    public void init(UserDTO userDTO) {
-        this.userDTO = userDTO;
-    }
 
-    public void initialize(){
-        try {
-            lblUserId.setText(userDTO.getUserId());
-            lblName.setText(userDTO.getName());
-            lblContact.setText(userDTO.getTelNo());
-            lblEmail.setText(userDTO.getEmail());
-            lblUserName.setText(userDTO.getUserName());
-            lblPassword.setText(userDTO.getPassword());
-        }catch (NullPointerException E){}
+    public MainFormController mainFormController;
+    public void init(UserDTO userDTO, MainFormController mainFormController) {
+        this.userDTO = userDTO;
+        this.mainFormController = mainFormController;
+        lblUserId.setText(userDTO.getUserId());
+        lblName.setText(userDTO.getName());
+        lblContact.setText(userDTO.getTelNo());
+        lblEmail.setText(userDTO.getEmail());
+        lblUserName.setText(userDTO.getUserName());
+        lblPassword.setText(userDTO.getPassword());
     }
 
     @FXML
@@ -60,9 +63,10 @@ public class UserDetailsFormController {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/user/UpdateUserForm.fxml"));
             Parent load = fxmlLoader.load();
             UpdateUserFormController updateUserFormController = fxmlLoader.getController();
-            updateUserFormController.init(userDTO);
+            updateUserFormController.init(userDTO, this);
             Stage stage = new Stage();
             stage.setScene(new Scene(load));
+            stage.setTitle("Update or Delete User details");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.centerOnScreen();
             stage.show();

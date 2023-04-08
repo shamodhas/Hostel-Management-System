@@ -6,7 +6,7 @@ import lk.ijse.hms.bo.exception.InUseException;
 import lk.ijse.hms.dto.CustomDTO;
 import lk.ijse.hms.dto.RoomDTO;
 
-import java.util.Arrays;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -39,4 +39,6 @@ public interface RoomBO extends SuperBO {
     boolean updateBook(RoomDTO roomDTO);
 
     boolean deleteRoom(RoomDTO roomDTO) throws InUseException;
+
+    long getAllReservationCountByDate(LocalDate date);
 }

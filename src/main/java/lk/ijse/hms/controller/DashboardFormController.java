@@ -1,11 +1,23 @@
 package lk.ijse.hms.controller;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.hms.bo.BoFactory;
+import lk.ijse.hms.bo.BoTypes;
+import lk.ijse.hms.bo.custom.RoomBO;
+import lk.ijse.hms.bo.custom.StudentBO;
+import lk.ijse.hms.view.tm.RoomTM;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.stream.Collectors;
 
 /**
  * Created By shamodha_s_rathnamalala
@@ -16,6 +28,8 @@ import javafx.scene.control.ScrollPane;
 public class DashboardFormController {
 
     @FXML
+    public TableView<RoomTM> tblRoom;
+    @FXML
     private Label lblTotalStudent;
 
     @FXML
@@ -25,22 +39,49 @@ public class DashboardFormController {
     private Label lblTotalNonPaidReservation;
 
     @FXML
-    private Label lblTotalIncomeToDay;
+    private BarChart barChart;
 
-    @FXML
-    private Label lblTotalReservationToDay;
+    private final StudentBO studentBO = BoFactory.getInstance().getBO(BoTypes.STUDENT);
 
-    @FXML
-    private BarChart<?, ?> barChart;
+    private final RoomBO roomBO = BoFactory.getInstance().getBO(BoTypes.ROOM);
 
-    @FXML
-    private CategoryAxis xAxis;
+    public void initialize(){
+        loadLabel();
+        loadBarChart();
+        loadTable();
+    }
 
-    @FXML
-    private NumberAxis yAxis;
+    private void loadTable() {
+        tblRoom.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("roomTypeId"));
+        tblRoom.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("type"));
+        tblRoom.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("keyMoney"));
+        tblRoom.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("qty"));
+        tblRoom.setItems(FXCollections.observableArrayList(roomBO.getAllRoom().stream().map(roomDTO -> new RoomTM(roomDTO.getRoomTypeId(), roomDTO.getType(), roomDTO.getKeyMoney(), roomDTO.getQty())).collect(Collectors.toList())));
+    }
 
-    @FXML
-    private ScrollPane scPane;
 
+    private void loadBarChart() {
+        XYChart.Series<String, Long> series = new XYChart.Series();
+        for (int i=1;i<16;i++) {
+            LocalDate date = calculateDate(-(15-i));
+            long count = roomBO.getAllReservationCountByDate(date);
+            series.getData().add(new XYChart.Data<>(date.toString(), count));
+        }
+        barChart.getData().addAll(series);
+    }
+
+    private LocalDate calculateDate(int n) {
+        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar=Calendar.getInstance();
+        calendar.add(Calendar.DATE,n);
+        String result=dateFormat.format(calendar.getTime());
+        return LocalDate.parse(result);
+    }
+
+    private void loadLabel() {
+        lblTotalStudent.setText(String.valueOf(studentBO.getAllStudent().size()));
+        lblTotalReservation.setText(String.valueOf(roomBO.getAllRoom().size()));
+        lblTotalNonPaidReservation.setText(String.valueOf(roomBO.getAllUnPaidReservation().size()));
+    }
 }
 

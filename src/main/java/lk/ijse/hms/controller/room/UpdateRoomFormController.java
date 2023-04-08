@@ -64,17 +64,10 @@ public class UpdateRoomFormController {
         this.manageRoomFormController = manageRoomFormController;
         this.roomTM = roomTM;
         cmbType.getItems().addAll("Non-AC", "Non-AC / FOOD", "AC", "AC / FOOD");
-        fillAllFields(roomTM);
-    }
-
-    private void fillAllFields(RoomTM roomTM){
         lblRoomTypeId.setText(roomTM.getRoomTypeId());
         cmbType.getSelectionModel().select(roomTM.getType());
         txtKeyMoney.setText(String.valueOf(roomTM.getKeyMoney()));
         txtQty.setText(String.valueOf(roomTM.getQty()));
-    }
-
-    public void initialize(){
         btnUpdate.setDisable(true);
         Pattern keyMoneyPattern = Pattern.compile("^[1-9][0-9]*(.[0-9]{1,2})?$");
         Pattern qtyPattern = Pattern.compile("^[1-9][0-9]*$");

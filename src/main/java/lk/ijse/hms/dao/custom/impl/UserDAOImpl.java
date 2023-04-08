@@ -52,13 +52,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public long count(Session session) {
-        return session.createQuery("FROM User").list().size();
-    }
-
-    @Override
     public Optional<User> findByUserName(String userName, Session session) {
-        Query query = session.createQuery("SELECT User FROM User WHERE userName= :u");
+        Query query = session.createQuery("FROM User WHERE userName= :u");
         query.setParameter("u", userName);
         List<User> list = query.list();
         return list.size() > 0? Optional.of(list.get(0)) : Optional.empty();

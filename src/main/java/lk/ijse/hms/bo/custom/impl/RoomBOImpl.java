@@ -19,6 +19,8 @@ import lk.ijse.hms.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -214,4 +216,13 @@ public class RoomBOImpl implements RoomBO {
         }
     }
 
+    @Override
+    public long getAllReservationCountByDate(LocalDate date) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        try {
+            return reservationDAO.findAllByDate(Date.valueOf(date), session);
+        }finally {
+            session.close();
+        }
+    }
 }

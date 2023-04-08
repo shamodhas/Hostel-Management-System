@@ -74,9 +74,7 @@ public class ManageReservationFormController {
                 ).collect(Collectors.toList());
                 tblReservation.setItems(FXCollections.observableArrayList(bookList));
             }
-
         } );
-
     }
 
     @FXML
@@ -90,7 +88,7 @@ public class ManageReservationFormController {
             Stage stage = new Stage();
             stage.setScene(new Scene(load));
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("New Reservation Registration Form");
+            stage.setTitle("New Reservation Registration");
             stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {

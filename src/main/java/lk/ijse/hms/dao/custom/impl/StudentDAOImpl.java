@@ -53,11 +53,6 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public long count(Session session) {
-        return session.createQuery("FROM Student ").list().size();
-    }
-
-    @Override
     public List<Student> search(String text, Session session) {
         text = "%"+text+"%";
         Query query = session.createQuery("FROM Student WHERE studentId LIKE :text OR name LIKE :text OR address LIKE :text OR contactNo LIKE :text OR gender like :text");

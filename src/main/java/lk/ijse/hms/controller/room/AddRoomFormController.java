@@ -56,9 +56,6 @@ public class AddRoomFormController {
 
     public void init(ManageRoomFormController manageRoomFormController) {
         this.manageRoomFormController = manageRoomFormController;
-    }
-
-    public void initialize(){
         cmbType.getItems().addAll("Non-AC", "Non-AC / FOOD", "AC", "AC / FOOD");
         hashMap.put(txtRoomTypeId, Pattern.compile("^RM-[0-9]{4}$"));
         hashMap.put(txtKeyMoney, Pattern.compile("^[1-9][0-9]*(.[0-9]{1,2})?$"));
@@ -82,21 +79,19 @@ public class AddRoomFormController {
             if (roomBO.saveRoom(roomDTO)){
                 new Alert(Alert.AlertType.CONFIRMATION,"Successfully saved..!").show();
                 manageRoomFormController.refreshTable();
+                txtRoomTypeId.clear();
+                cmbType.setValue(null);
+                txtKeyMoney.clear();
+                txtQty.clear();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Failed to Save the room..!").show();
-                return;
             }
         }catch (DuplicateException e){
             new Alert(Alert.AlertType.ERROR,"Room Id Already Exists..!").show();
             txtRoomTypeId.setFocusColor(Color.RED);
             txtRoomTypeId.selectAll();
             txtRoomTypeId.requestFocus();
-            return;
         }
-        txtRoomTypeId.clear();
-        cmbType.setValue(null);
-        txtKeyMoney.clear();
-        txtQty.clear();
     }
 
     @FXML

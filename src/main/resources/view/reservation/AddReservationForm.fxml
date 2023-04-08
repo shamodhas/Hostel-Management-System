@@ -34,17 +34,17 @@
             <HBox alignment="CENTER" spacing="10.0">
                <children>
                   <JFXComboBox fx:id="cmbStudentId" focusColor="BLACK" labelFloat="true" onAction="#cmbStudentIdOnAction" prefHeight="40.0" prefWidth="300.0" promptText="Student Id" unFocusColor="BLACK" />
-                  <JFXTextField fx:id="txtName" editable="false" focusColor="#3498db" labelFloat="true" prefHeight="40.0" prefWidth="300.0" promptText="Name" unFocusColor="BLACK">
+                  <JFXTextField fx:id="txtName" editable="false" focusColor="#3498db" focusTraversable="false" labelFloat="true" prefHeight="40.0" prefWidth="300.0" promptText="Name" unFocusColor="BLACK">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="txtAddress" editable="false" focusColor="#3498db" labelFloat="true" prefHeight="40.0" prefWidth="300.0" promptText="Address" unFocusColor="BLACK">
+                  <JFXTextField fx:id="txtAddress" editable="false" focusColor="#3498db" focusTraversable="false" labelFloat="true" prefHeight="40.0" prefWidth="300.0" promptText="Address" unFocusColor="BLACK">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="txtContactNo" editable="false" focusColor="#3498db" labelFloat="true" prefHeight="40.0" prefWidth="300.0" promptText="Contact No" unFocusColor="BLACK">
+                  <JFXTextField fx:id="txtContactNo" editable="false" focusColor="#3498db" focusTraversable="false" labelFloat="true" prefHeight="40.0" prefWidth="300.0" promptText="Contact No" unFocusColor="BLACK">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
@@ -53,18 +53,18 @@
             </HBox>
             <HBox alignment="CENTER" spacing="10.0">
                <children>
-                  <JFXComboBox fx:id="cmbRoomTypeId" focusColor="BLACK" labelFloat="true" onAction="#cmbRoomTypeIdOnAction" prefHeight="40.0" prefWidth="300.0" promptText="Room Type Id" unFocusColor="BLACK" />
-                  <JFXTextField fx:id="txtType" editable="false" focusColor="#3498db" labelFloat="true" prefHeight="40.0" prefWidth="300.0" promptText="Type" unFocusColor="BLACK">
+                  <JFXComboBox fx:id="cmbRoomTypeId" focusColor="BLACK" focusTraversable="false" labelFloat="true" onAction="#cmbRoomTypeIdOnAction" prefHeight="40.0" prefWidth="300.0" promptText="Room Type Id" unFocusColor="BLACK" />
+                  <JFXTextField fx:id="txtType" editable="false" focusColor="#3498db" focusTraversable="false" labelFloat="true" prefHeight="40.0" prefWidth="300.0" promptText="Type" unFocusColor="BLACK">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="txtKeyMoney" editable="false" focusColor="#3498db" labelFloat="true" prefHeight="40.0" prefWidth="300.0" promptText="Key Money" unFocusColor="BLACK">
+                  <JFXTextField fx:id="txtKeyMoney" editable="false" focusColor="#3498db" focusTraversable="false" labelFloat="true" prefHeight="40.0" prefWidth="300.0" promptText="Key Money" unFocusColor="BLACK">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="txtQty" editable="false" focusColor="#3498db" labelFloat="true" prefHeight="40.0" prefWidth="300.0" promptText="Quantity" unFocusColor="BLACK">
+                  <JFXTextField fx:id="txtQty" editable="false" focusColor="#3498db" focusTraversable="false" labelFloat="true" prefHeight="40.0" prefWidth="300.0" promptText="Quantity" unFocusColor="BLACK">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
@@ -73,7 +73,7 @@
             </HBox>
             <HBox alignment="CENTER" prefWidth="150.0">
                <children>
-                  <JFXComboBox fx:id="cmbPaymentStatus" focusColor="BLACK" labelFloat="true" maxWidth="300.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Payment Status" unFocusColor="BLACK" />
+                  <JFXComboBox fx:id="cmbPaymentStatus" focusColor="BLACK" focusTraversable="false" labelFloat="true" maxWidth="300.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Payment Status" unFocusColor="BLACK" />
                </children>
             </HBox>
             <JFXButton buttonType="RAISED" maxHeight="40.0" maxWidth="150.0" minHeight="30.0" minWidth="100.0" onAction="#btnRegisterOnAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #2ecc71;" text="Register" textFill="WHITE">

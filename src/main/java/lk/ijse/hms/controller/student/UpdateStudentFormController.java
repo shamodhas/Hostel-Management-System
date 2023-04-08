@@ -144,22 +144,22 @@ public class UpdateStudentFormController {
 
     @FXML
     void txtAddressOnAction(ActionEvent event) {
-
+        txtContact.requestFocus();
     }
 
     @FXML
     void txtContactOnAction(ActionEvent event) {
-
+        txtDOB.requestFocus();
     }
 
     @FXML
     void txtNameOnAction(ActionEvent event) {
-
+        txtAddress.requestFocus();
     }
 
     @FXML
     public void txtDOBOnAction(ActionEvent actionEvent) {
-
+        cmbGender.requestFocus();
     }
 
     @FXML

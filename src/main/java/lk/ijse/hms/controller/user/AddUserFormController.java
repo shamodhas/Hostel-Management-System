@@ -74,8 +74,7 @@ public class AddUserFormController {
     }
 
     public void initialize(){
-        btnRegister.setDisable(true);
-        txtId.setText(loginBO.getNextUserId());
+        clearUserField();
         hashMap.put(txtName, Pattern.compile("^[A-z ]{3,30}$"));
         hashMap.put(txtContact, Pattern.compile("^(?:7|0|(?:\\+94))(70|77|78|74|76|72|71)[0-9]{7}$"));
         hashMap.put(txtEmail, Pattern.compile("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$"));
@@ -83,9 +82,18 @@ public class AddUserFormController {
         hashMap.put(txtPassword, Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"));
     }
 
+    private void clearUserField(){
+        btnRegister.setDisable(true);
+        txtId.setText(loginBO.getNextUserId());
+        txtName.clear();
+        txtContact.clear();
+        txtEmail.clear();
+        txtUserName.clear();
+        txtPassword.clear();
+    }
+
     @FXML
     void btnRegisterOnAction(ActionEvent event) {
-        System.out.println(isCreateNewUser);
         UserDTO userDTO = new UserDTO(txtId.getText(), txtName.getText(), txtContact.getText(), txtEmail.getText(), txtUserName.getText(), txtPassword.getText());
         try {
             if (loginBO.saveUser(userDTO)) {
@@ -95,6 +103,7 @@ public class AddUserFormController {
                     new Alert(Alert.AlertType.CONFIRMATION,"Successfully saved..!\nusername password will be automatically added...").show();
                 } else {
                     manageUserFormController.refreshTable();
+                    clearUserField();
                     new Alert(Alert.AlertType.CONFIRMATION,"Successfully saved..!").show();
                 }
             }else {
@@ -110,27 +119,28 @@ public class AddUserFormController {
 
     @FXML
     void txtContactOnAction(ActionEvent event) {
-
+        txtEmail.requestFocus();
     }
 
     @FXML
     void txtEmailOnAction(ActionEvent event) {
-
+        txtUserName.requestFocus();
     }
 
     @FXML
     void txtNameOnAction(ActionEvent event) {
-
+        txtContact.requestFocus();
     }
 
     @FXML
     void txtPasswordOnAction(ActionEvent event) {
-
+        if (!btnRegister.isDisable())
+            btnRegisterOnAction(event);
     }
 
     @FXML
     void txtUserNameOnAction(ActionEvent event) {
-
+        txtPassword.requestFocus();
     }
 
     @FXML

@@ -42,19 +42,19 @@
             <VBox layoutX="10.0" layoutY="10.0" spacing="10.0">
                <children>
                   <Label text="TYPE :" />
-                  <JFXComboBox fx:id="cmbType" onAction="#cmbTypeOnAction" prefHeight="25.0" prefWidth="371.0" promptText="Type" />
+                  <JFXComboBox fx:id="cmbType" focusTraversable="false" onAction="#cmbTypeOnAction" prefHeight="25.0" prefWidth="371.0" promptText="Type" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="87.0" spacing="10.0">
                <children>
                   <Label text="KEY MONEY :" />
-                  <JFXTextField fx:id="txtKeyMoney" onAction="#txtKeyMoneyOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. 1200.00" />
+                  <JFXTextField fx:id="txtKeyMoney" focusTraversable="false" onAction="#txtKeyMoneyOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. 1200.00" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="164.0" spacing="10.0">
                <children>
                   <Label text="QUANTITY :" />
-                  <JFXTextField fx:id="txtQty" onAction="#txtQtyOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. 10" />
+                  <JFXTextField fx:id="txtQty" focusTraversable="false" onAction="#txtQtyOnAction" onKeyReleased="#txtKeyReleased" promptText="Ex. 10" />
                </children>
             </VBox>
             <JFXButton fx:id="btnAdd" onAction="#btnAddOnAction" prefWidth="120.0" style="-fx-background-color: #2ecc71;" text="Add" textFill="WHITE">

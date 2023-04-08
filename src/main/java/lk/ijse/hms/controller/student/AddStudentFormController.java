@@ -85,6 +85,12 @@ public class AddStudentFormController {
             if (studentBO.saveStudent(new StudentDTO(txtId.getText(), txtName.getText(), txtAddress.getText(), txtContact.getText(), LocalDate.parse(txtDOB.getText()), cmbGender.getValue()))){
                 new Alert(Alert.AlertType.CONFIRMATION,"Successfully saved..!").show();
                 manageStudentFormController.refreshTable();
+                txtId.clear();
+                txtName.clear();
+                txtAddress.clear();
+                txtContact.clear();
+                txtDOB.clear();
+                cmbGender.getSelectionModel().clearSelection();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Failed to Save the student..!").show();
             }
@@ -100,22 +106,22 @@ public class AddStudentFormController {
 
     @FXML
     void txtAddressOnAction(ActionEvent event) {
-
+        txtContact.requestFocus();
     }
 
     @FXML
     void txtContactOnAction(ActionEvent event) {
-
+        txtDOB.requestFocus();
     }
 
     @FXML
     void txtDOBOnAction(ActionEvent event) {
-
+        cmbGender.requestFocus();
     }
 
     @FXML
     void txtIdOnAction(ActionEvent event) {
-
+        txtName.requestFocus();
     }
 
     @FXML
@@ -132,7 +138,7 @@ public class AddStudentFormController {
 
     @FXML
     void txtNameOnAction(ActionEvent event) {
-
+        txtAddress.requestFocus();
     }
 
     @FXML

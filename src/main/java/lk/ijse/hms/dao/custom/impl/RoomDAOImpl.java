@@ -54,11 +54,6 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public long count(Session session) {
-        return session.createQuery("FROM Room ").list().size();
-    }
-
-    @Override
     public List<Room> search(String text, Session session) {
         text = "%"+text+"%";
         Query query = session.createQuery("FROM Room WHERE roomTypeId LIKE :text OR type LIKE :text ");

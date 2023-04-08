@@ -86,6 +86,44 @@ public class LoginBOImpl implements LoginBO {
         }catch (DuplicateException e){
             throw new DuplicateException();
         }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
+            return false;
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public boolean updateUser(UserDTO userDTO) throws DuplicateException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            Optional<User> optionalUser = userDAO.findByUserName(userDTO.getUserName(), session);
+            if (optionalUser.isPresent() && (!optionalUser.get().getUserId().equals(userDTO.getUserId())))
+                throw new DuplicateException();
+            userDAO.update(convertor.toUser(userDTO), session);
+            transaction.commit();
+            return true;
+        }catch (DuplicateException e){
+            throw new DuplicateException();
+        }catch (Exception e){
+            transaction.rollback();
+            return false;
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public boolean deleteUser(UserDTO userDTO) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            userDAO.deleteByPk(userDTO.getUserId(), session);
+            transaction.commit();
+            return true;
+        }catch (Exception e){
             transaction.rollback();
             return false;
         }finally {

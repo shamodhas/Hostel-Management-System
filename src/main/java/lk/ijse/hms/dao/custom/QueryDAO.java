@@ -3,6 +3,7 @@ package lk.ijse.hms.dao.custom;
 import lk.ijse.hms.dao.SuperDAO;
 import org.hibernate.Session;
 
+import java.sql.Date;
 import java.util.List;
 
 /**

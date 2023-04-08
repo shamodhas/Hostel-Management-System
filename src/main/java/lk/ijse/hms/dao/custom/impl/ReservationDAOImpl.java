@@ -7,6 +7,7 @@ import lk.ijse.hms.entity.Room;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,15 +56,15 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public long count(Session session) {
-        return session.createQuery("FROM Reservation ").list().size();
-    }
-
-    @Override
     public boolean updateStatusByPk(String reservationId, CustomDTO.Status status, Session session) {
         Query query = session.createQuery("UPDATE Reservation SET status = :status WHERE resId = :reservationId");
         query.setParameter("status", (status == CustomDTO.Status.PAID?"PAID":"UNPAID"));
         query.setParameter("reservationId", reservationId);
         return 0 < query.executeUpdate();
+    }
+
+    @Override
+    public long findAllByDate(Date valueOf, Session session) {
+        return session.createQuery("FROM Reservation WHERE date = :date").setParameter("date", valueOf).list().size();
     }
 }

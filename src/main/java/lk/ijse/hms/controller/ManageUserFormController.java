@@ -37,9 +37,6 @@ public class ManageUserFormController {
     private TableView<UserTM> tblUser;
 
     @FXML
-    private JFXButton btnAdd;
-
-    @FXML
     private JFXButton btnUpdateDelete;
 
     @FXML
@@ -123,9 +120,9 @@ public class ManageUserFormController {
             FXMLLoader fxmlLoader = new FXMLLoader(resource);
             Parent load = fxmlLoader.load();
             UpdateUserFormController controller = fxmlLoader.getController();
-            controller.init(tblUser.getSelectionModel().getSelectedItem(),this);
+            controller.init(tblUser.getSelectionModel().getSelectedItem().toUserDTO(),this);
             Stage stage = new Stage();
-            stage.setTitle("Update/Delete user details");
+            stage.setTitle("Update and Delete user details");
             stage.setScene(new Scene(load));
             stage.centerOnScreen();
             stage.initModality(Modality.APPLICATION_MODAL);

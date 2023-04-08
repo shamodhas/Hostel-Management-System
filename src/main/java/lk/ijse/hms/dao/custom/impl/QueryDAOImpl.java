@@ -4,6 +4,7 @@ import lk.ijse.hms.dao.custom.QueryDAO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.sql.Date;
 import java.util.List;
 
 /**

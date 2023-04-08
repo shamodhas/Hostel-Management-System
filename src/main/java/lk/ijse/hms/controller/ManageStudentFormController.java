@@ -37,9 +37,6 @@ public class ManageStudentFormController {
     private TableView<StudentTM> tblStudent;
 
     @FXML
-    private JFXButton btnAddStudent;
-
-    @FXML
     private JFXButton btnUpdateDelete;
 
     @FXML
@@ -84,7 +81,6 @@ public class ManageStudentFormController {
             if (curr!=pre || curr!=null){
                 btnUpdateDelete.setDisable(false);
             }
-
         });
     }
 
@@ -105,7 +101,6 @@ public class ManageStudentFormController {
             Parent load = fxmlLoader.load();
             AddStudentFormController addStudentFormController = fxmlLoader.getController();
             addStudentFormController.init(this);
-
             Stage stage = new Stage();
             stage.setScene(new Scene(load));
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -126,7 +121,7 @@ public class ManageStudentFormController {
             UpdateStudentFormController controller = fxmlLoader.getController();
             controller.init(tblStudent.getSelectionModel().getSelectedItem(),this);
             Stage stage = new Stage();
-            stage.setTitle("Update/Delete Student details");
+            stage.setTitle("Update and Delete Student details");
             stage.setScene(new Scene(load));
             stage.centerOnScreen();
             stage.initModality(Modality.APPLICATION_MODAL);
