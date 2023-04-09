@@ -66,6 +66,7 @@ public class MainFormController {
         buttonList.add(btnReservation);
         buttonList.add(btnPayment);
         buttonList.add(btnUser);
+        btnOnAction(btnDashboard);
         navigation("/view/DashboardForm.fxml");
     }
 
