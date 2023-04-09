@@ -80,7 +80,7 @@ public class DashboardFormController {
 
     private void loadLabel() {
         lblTotalStudent.setText(String.valueOf(studentBO.getAllStudent().size()));
-        lblTotalReservation.setText(String.valueOf(roomBO.getAllRoom().size()));
+        lblTotalReservation.setText(String.valueOf(roomBO.getAllReservation().size()));
         lblTotalNonPaidReservation.setText(String.valueOf(roomBO.getAllUnPaidReservation().size()));
     }
 }
