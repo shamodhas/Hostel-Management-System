@@ -83,6 +83,7 @@ public class AddRoomFormController {
                 cmbType.setValue(null);
                 txtKeyMoney.clear();
                 txtQty.clear();
+                txtRoomTypeId.requestFocus();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Failed to Save the room..!").show();
             }
