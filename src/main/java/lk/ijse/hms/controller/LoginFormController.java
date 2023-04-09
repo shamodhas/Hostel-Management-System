@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -64,6 +65,7 @@ public class LoginFormController {
             AddUserFormController addUserFormController = fxmlLoader.getController();
             addUserFormController.init(this);
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("assets/Add_user_icon.png"));
             stage.setScene(new Scene(load));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Create User Account");
@@ -95,6 +97,7 @@ public class LoginFormController {
                 MainFormController mainFormController = fxmlLoader.getController();
                 mainFormController.init(userDTO);
                 Stage stage = new Stage();
+                stage.getIcons().add(new Image("assets/logo.png"));
                 stage.setTitle("Dashboard");
                 stage.setScene(new Scene(load));
                 stage.initModality(Modality.WINDOW_MODAL);

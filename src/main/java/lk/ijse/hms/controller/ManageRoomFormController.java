@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lk.ijse.hms.bo.BoFactory;
@@ -82,6 +83,7 @@ public class ManageRoomFormController {
             AddRoomFormController addRoomFormController = fxmlLoader.getController();
             addRoomFormController.init(this);
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("assets/door_plus_icon.png"));
             stage.setScene(new Scene(load));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Add New Room");
@@ -105,6 +107,7 @@ public class ManageRoomFormController {
             updateRoomFormController.init(tblRoom.getSelectionModel().getSelectedItem(), this);
             Stage stage = new Stage();
             stage.setScene(new Scene(load));
+            stage.getIcons().add(new Image("assets/door-edit-icon.png"));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Update and Delete Room details");
             stage.centerOnScreen();

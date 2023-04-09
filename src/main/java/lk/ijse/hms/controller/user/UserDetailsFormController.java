@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lk.ijse.hms.controller.MainFormController;
@@ -65,6 +66,7 @@ public class UserDetailsFormController {
             UpdateUserFormController updateUserFormController = fxmlLoader.getController();
             updateUserFormController.init(userDTO, this);
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("assets/update_user.png"));
             stage.setScene(new Scene(load));
             stage.setTitle("Update or Delete User details");
             stage.initModality(Modality.APPLICATION_MODAL);

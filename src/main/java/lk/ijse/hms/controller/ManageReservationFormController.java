@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lk.ijse.hms.bo.BoFactory;
@@ -86,6 +87,7 @@ public class ManageReservationFormController {
             AddReservationFormController addReservationFormController = fxmlLoader.getController();
             addReservationFormController.init(this);
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("assets/reservation.png"));
             stage.setScene(new Scene(load));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("New Reservation Registration");

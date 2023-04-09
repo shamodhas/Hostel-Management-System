@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lk.ijse.hms.bo.BoFactory;
@@ -101,8 +102,8 @@ public class ManageUserFormController {
             Parent load = fxmlLoader.load();
             AddUserFormController addUserFormController = fxmlLoader.getController();
             addUserFormController.init(this);
-
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("assets/UserIcon.png"));
             stage.setScene(new Scene(load));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("New User Registration Form");
@@ -122,6 +123,7 @@ public class ManageUserFormController {
             UpdateUserFormController controller = fxmlLoader.getController();
             controller.init(tblUser.getSelectionModel().getSelectedItem().toUserDTO(),this);
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("assets/update_icon.jpg"));
             stage.setTitle("Update and Delete user details");
             stage.setScene(new Scene(load));
             stage.centerOnScreen();

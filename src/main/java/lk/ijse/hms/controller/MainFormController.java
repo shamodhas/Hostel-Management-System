@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import com.jfoenix.controls.JFXButton;
@@ -113,6 +114,7 @@ public class MainFormController {
             AdminLoginFormController adminLoginFormController = fxmlLoader.getController();
             adminLoginFormController.init(this);
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("assets/user.png"));
             stage.setScene(new Scene(load));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.centerOnScreen();
@@ -136,6 +138,7 @@ public class MainFormController {
             UserDetailsFormController userDetailsFormController = fxmlLoader.getController();
             userDetailsFormController.init(userDTO, this);
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("assets/UserIcon.png"));
             stage.setScene(new Scene(load));
             stage.setTitle("User Details");
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -155,6 +158,7 @@ public class MainFormController {
             stage.setScene(new Scene(load));
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initStyle(StageStyle.TRANSPARENT);
+            stage.getIcons().add(new Image("assets/logo.png"));
             stage.setTitle("Login");
             stage.centerOnScreen();
             stage.show();

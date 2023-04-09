@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lk.ijse.hms.bo.BoFactory;
@@ -102,6 +103,7 @@ public class ManageStudentFormController {
             AddStudentFormController addStudentFormController = fxmlLoader.getController();
             addStudentFormController.init(this);
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("assets/Add_user_icon.png"));
             stage.setScene(new Scene(load));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("New Student Registration Form");
@@ -121,6 +123,7 @@ public class ManageStudentFormController {
             UpdateStudentFormController controller = fxmlLoader.getController();
             controller.init(tblStudent.getSelectionModel().getSelectedItem(),this);
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("assets/update_icon.jpg"));
             stage.setTitle("Update and Delete Student details");
             stage.setScene(new Scene(load));
             stage.centerOnScreen();
