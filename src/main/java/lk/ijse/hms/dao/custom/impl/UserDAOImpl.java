@@ -62,7 +62,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public List<User> search(String text, Session session) {
         text = "%"+text+"%";
-        Query query = session.createQuery("SELECT User FROM User WHERE userId LIKE :text OR name LIKE :text OR contactNo LIKE :text OR email LIKE :text OR userName LIKE :text OR password LIKE :text");
+        Query query = session.createQuery("FROM User WHERE userId LIKE :text OR name LIKE :text OR contactNo LIKE :text OR email LIKE :text OR userName LIKE :text OR password LIKE :text");
         query.setParameter("text", text);
         return query.list();
     }
