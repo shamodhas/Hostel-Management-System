@@ -40,14 +40,14 @@ public class QueryDAOImpl implements QueryDAO {
     }
 
     @Override
-    public List<Object[]> findAllReservationDetailsByRoomTypeId(String roomTypeId, Session session) {
-        Query query = session.createQuery("SELECT re.resId,s.studentId,s.name,ro.roomTypeId,ro.type,ro.keyMoney,re.status,re.date FROM Reservation re JOIN Student s ON re.student = s.studentId JOIN Room ro ON re.room =ro.roomTypeId WHERE ro.roomTypeId = :roomTypeId");
-        return query.setParameter("roomTypeId", roomTypeId).list();
+    public List<Object[]> findAllUnPaidReservationDetailsByStudentId(String studentId, Session session) {
+        Query query = session.createQuery("SELECT re.resId,s.studentId,s.name,ro.roomTypeId,ro.type,ro.keyMoney,re.status,re.date FROM Reservation re JOIN Student s ON re.student = s.studentId JOIN Room ro ON re.room =ro.roomTypeId WHERE s.studentId = :studentId AND re.status = 'UNPAID'");
+        return query.setParameter("studentId", studentId).list();
     }
 
     @Override
-    public List<Object[]> findAllUnPaidReservationDetailsByStudentId(String studentId, Session session) {
-        Query query = session.createQuery("SELECT re.resId,s.studentId,s.name,ro.roomTypeId,ro.type,ro.keyMoney,re.status,re.date FROM Reservation re JOIN Student s ON re.student = s.studentId JOIN Room ro ON re.room =ro.roomTypeId WHERE re.student = :studentId AND re.status = 'UNPAID'");
-        return query.setParameter("studentId", studentId).list();
+    public List<Object[]> findAllReservationDetailsByRoomTypeId(String roomTypeId, Session session) {
+        Query query = session.createQuery("SELECT re.resId,s.studentId,s.name,ro.roomTypeId,ro.type,ro.keyMoney,re.status,re.date FROM Reservation re JOIN Student s ON re.student = s.studentId JOIN Room ro ON re.room =ro.roomTypeId WHERE ro.roomTypeId = :roomTypeId");
+        return query.setParameter("roomTypeId", roomTypeId).list();
     }
 }

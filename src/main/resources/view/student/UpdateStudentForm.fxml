@@ -58,7 +58,7 @@
             <VBox layoutX="10.0" layoutY="241.0" spacing="10.0">
                <children>
                   <Label text="DOB :" />
-                  <JFXTextField fx:id="txtDOB" editable="false" focusTraversable="false" onAction="#txtDOBOnAction" onKeyReleased="#txtKeyReleased" prefHeight="25.0" prefWidth="376.0" promptText="Ex. 1948-09-27" />
+                  <JFXTextField fx:id="txtDOB" focusTraversable="false" onAction="#txtDOBOnAction" onKeyReleased="#txtKeyReleased" prefHeight="25.0" prefWidth="376.0" promptText="Ex. 1948-09-27" />
                </children>
             </VBox>
             <VBox layoutX="10.0" layoutY="318.0" spacing="10.0">
