@@ -68,41 +68,41 @@ public class MainFormController {
         buttonList.add(btnReservation);
         buttonList.add(btnPayment);
         buttonList.add(btnUser);
-        btnOnAction(btnDashboard);
+        btnActionOn(btnDashboard);
         navigation("/view/DashboardForm.fxml");
     }
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) {
-        btnOnAction(btnDashboard);
+        btnActionOn(btnDashboard);
         navigation("/view/DashboardForm.fxml");
         ((Stage)pneContainer.getScene().getWindow()).setTitle("Dashboard");
     }
 
     @FXML
     void btnPaymentOnAction(ActionEvent event) {
-        btnOnAction(btnPayment);
+        btnActionOn(btnPayment);
         navigation("/view/PaymentForm.fxml");
         ((Stage)pneContainer.getScene().getWindow()).setTitle("Manage Payment");
     }
 
     @FXML
     void btnReservationOnAction(ActionEvent event) {
-        btnOnAction(btnReservation);
+        btnActionOn(btnReservation);
         navigation("/view/ManageReservationForm.fxml");
         ((Stage)pneContainer.getScene().getWindow()).setTitle("Manage Reservation");
     }
 
     @FXML
     void btnRoomOnAction(ActionEvent event) {
-        btnOnAction(btnRoom);
+        btnActionOn(btnRoom);
         navigation("/view/ManageRoomForm.fxml");
         ((Stage)pneContainer.getScene().getWindow()).setTitle("Manage Room");
     }
 
     @FXML
     void btnStudentOnAction(ActionEvent event) {
-        btnOnAction(btnStudent);
+        btnActionOn(btnStudent);
         navigation("/view/ManageStudentForm.fxml");
         ((Stage)pneContainer.getScene().getWindow()).setTitle("Manage Student");
     }
@@ -118,6 +118,8 @@ public class MainFormController {
             stage.getIcons().add(new Image("assets/user.png"));
             stage.setScene(new Scene(load));
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setTitle("Admin Login");
             stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {
@@ -126,7 +128,7 @@ public class MainFormController {
     }
 
     public void goUserOnAction(){
-        btnOnAction(btnUser);
+        btnActionOn(btnUser);
         navigation("/view/ManageUserForm.fxml");
         ((Stage)pneContainer.getScene().getWindow()).setTitle("Manage User");
     }
@@ -182,7 +184,7 @@ public class MainFormController {
         }
     }
 
-    private void btnOnAction(JFXButton selectedBTN){
+    private void btnActionOn(JFXButton selectedBTN){
         for (JFXButton jfxButton:buttonList){
             jfxButton.getStyleClass().removeAll("selected-nav-btn");
             jfxButton.getStyleClass().addAll("nav-btn");
